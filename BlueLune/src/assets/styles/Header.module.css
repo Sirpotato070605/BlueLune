@@ -1,0 +1,422 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000000 ;
+  padding: 10px 20px;
+  /* cho header full chiều ngang */
+  width: 100%;
+  /* border: #cccccc 2px solid; */
+  position: fixed;
+  margin: 0;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-right: auto;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 8px;
+  color: white;
+}
+
+/* ============== Home Button ============== */
+.homeButtonArea {
+  margin-left: 20px;
+  margin-right: 15px;
+}
+
+.homeButton {
+  background: transparent;
+  border: none;
+  height: 40px;
+  width: 40px; 
+  cursor: pointer;
+  background: #1f1f1f;
+  padding: 4px;
+  /* border: 1px solid #444; */
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.homeButton img {
+    width: 24px;  /* hoặc kích thước phù hợp */
+    height: 24px;
+    display: block;
+    margin: auto;
+}
+
+/*============== Album Button ============== */
+
+.albumButtonArea {
+  margin-right: 15px;
+}
+
+.albumButton {
+  background: transparent;
+  border: none;
+  height: 40px;
+  width: 40px; 
+  cursor: pointer;
+  background: #1f1f1f;
+  padding: 4px;
+  /* border: 1px solid #444; */
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.albumButton img {
+    width: 24px;  /* hoặc kích thước phù hợp */
+    height: 24px;
+    display: block;
+    margin: auto;
+}
+
+/* ========== search bar ========== */
+
+.searchArea { 
+  display: flex;
+  width: 300px;
+  height: 27px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  /* border: 1px solid #444; */
+  background: #1f1f1f;
+  color: white;
+}
+
+.searchArea input {
+  width: 90%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+  outline: none;
+}
+
+.searchButton {
+  width: 10%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  /* border: #000000 1px solid;
+  border-radius: 50%; */
+}
+
+.searchButton img {
+    width: 20px;  /* hoặc kích thước phù hợp */
+    height: 20px;
+    display: block;
+    margin: auto;
+}
+
+/* ==================== Notification Bell ====================== */
+
+.notificationBell {
+  /* flex: 0 0 auto; */
+  margin-left: 15px;
+}
+
+.bellButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  height: 40px;
+  width: 40px; 
+  background: #1f1f1f;
+  padding: 4px;
+  /* border: 1px solid #444; */
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bellButton img {
+    width: 24px;  /* hoặc kích thước phù hợp */
+    height: 24px;
+    display: block;
+    margin: auto;
+}
+
+
+/*=================== USER AREA ======================== */
+
+.userArea {
+  margin-left: 20px;
+  margin-right: 10px;
+  font-size: large;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.authButtons button{
+    color: #000000;
+    background-color: rgb(221, 255, 255);
+    width: 90px;
+    height: 40px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+}
+
+
+
+/* ================== Avatar Spin Animation =====================  */
+.avatar {
+  transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.avatar.spin {
+  animation: spin-slow 30s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/*=================== Button Hover and Active Effects ===================== */
+
+/* Common button styles */
+.homeButton, .albumButton, .bellButton {
+  transition: all 0.2s ease-in-out;
+}
+
+
+/* Hiệu ứng khi di chuột qua buttons */
+.homeButton:hover, .albumButton:hover, .bellButton:hover {
+  transform: scale(1.1);
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 123, 255, 0.3) 50%,
+    rgba(0, 123, 255, 0.6) 100%
+  );
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+  border: 1px solid rgba(0, 123, 255, 0.8);
+}
+
+/* Hiệu ứng khi nhấn chuột */
+/* .homeButton:active, .albumButton:active, .bellButton:active {
+  transform: scale(0.95);
+  background: radial-gradient(
+    circle at center,
+    rgba(33, 150, 243, 0.4) 0%,
+    rgba(56, 164, 252, 0.2) 50%,
+    transparent 100%
+  );
+} */
+
+
+/*============================ search area hover and active ====================== */
+
+.searchArea {
+  transition: all 0.2s ease-in-out;
+  border: 1px solid transparent;
+}
+
+/* Hiệu ứng hover cho search area */
+.searchArea:hover,
+.searchArea:focus-within,
+.searchArea:has(input:not(:placeholder-shown)) {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+  border: 1px solid rgba(0, 123, 255, 0.8);
+  transform: scale(1.02); 
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 123, 255, 0.3) 50%,
+    rgba(0, 123, 255, 0.6) 100%
+  );
+}
+
+.searchArea input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s ease-in-out;
+}
+
+/*=============== authButton hover ===================== */
+
+.albumButton button {
+  transition: all 0.3s ease-in-out;
+}
+
+.authButtons button:hover {
+  transform: scale(1.1);
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 123, 255, 0.3) 50%,
+    rgba(0, 123, 255, 0.6) 100%
+  );
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.7);
+  border: 1px solid rgba(0, 123, 255, 0.8);
+  cursor: pointer;
+  color: #ffffff;
+}
+
+/* Shrink effect for the non-hovered button when sibling is hovered */
+.authButtons button:hover ~ button,
+.authButtons button:not(:hover) {
+  transform: scale(0.9);
+  opacity: 0.9;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Thêm transition mượt hơn */
+}
+
+/* Reset về trạng thái ban đầu */
+.authButtons:not(:hover) button {
+  transform: scale(1);
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Thêm transition mượt hơn */
+}
+
+/*=======================Logo hover effect ===================== */
+
+.logo {
+  transition: all 0.3s ease-in-out;
+}
+
+.logo:hover {
+  color: rgb(222, 238, 255);
+  text-shadow: 0 0 25px rgba(0, 123, 255, 0.9);
+}
+
+
+/* Username hover effect */
+.userName {
+  transition: all 0.3s ease;
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.userProfile:hover .userName {
+  color: rgb(222, 238, 255);
+  text-shadow: 0 0 25px rgba(0, 123, 255, 0.9);
+}
+
+/* Adjust existing userProfile hover */
+.userProfile:hover {
+  background: radial-gradient(
+    circle at center,
+    transparent 0%,
+    rgba(0, 123, 255, 0.1) 50%,
+    rgba(0, 123, 255, 0.2) 100%
+  );
+}
+
+/*================= User Profile Dropdown Menu ===================== */
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.userProfile:hover {
+  background: rgba(0, 123, 255, 0.1);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  background: #1f1f1f;
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 123, 255, 0.2);
+}
+
+.dropdownMenu button {
+  width: 100%;
+  padding: 10px 15px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 10px;
+}
+
+.dropdownMenu button:hover {
+  background: rgba(0, 123, 255, 0.2);
+  padding-left: 20px;
+}
+
+.divider {
+  margin: 8px 0;
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logoutBtn {
+  color: #ff4444 !important;
+}
+
+/* Để xử lý position correct cho dropdown */
+.userArea {
+  position: relative;
+}
+
+
+/*===================== chỉnh lại kích thước header ==================== */
+
+
+.header {
+  transform: scale(0.95); /* Thêm dòng này */
+  transform-origin: top center;
+}
+
+.homeButton, .albumButton, .bellButton {
+  height: 36px; /* Giảm từ 40px */
+  width: 36px;  /* Giảm từ 40px */
+}
+
+.searchArea { 
+  width: 270px; /* Giảm từ 300px */
+  height: 24px; /* Giảm từ 27px */
+}
+
+.avatar {
+  width: 36px; /* Giảm từ 40px */
+  height: 36px; /* Giảm từ 40px */
+}
+
+.authButtons button {
+  width: 81px;  /* Giảm từ 90px */
+  height: 36px; /* Giảm từ 40px */
+}
+
+.dropdownMenu {
+  width: 180px; /* Giảm từ 200px */
+}
