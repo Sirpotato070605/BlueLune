@@ -1,0 +1,215 @@
+.playerBar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000000;
+    padding: 8px 0; /* Giảm padding tổng thể */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Đảm bảo căn giữa theo chiều dọc cho toàn bộ khu vực */
+    height: 50px; /* Giảm chiều cao cố định của khu vực controls */
+    padding: 0 20px;
+    position: relative;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    height: 60px; /* Đặt chiều cao cố định cho khu vực controls */
+    padding: 0 20px;
+    position: relative; /* Quan trọng cho việc căn giữa tuyệt đối */
+}
+
+/* === Căn giữa tuyệt đối cho khu vực TRUNG TÂM === */
+.centerSection {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 650px;
+}
+
+/* Khu vực còn lại (Left & Right) */
+
+.leftControls {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Giảm khoảng cách */
+    position: absolute; 
+    left: 20px;
+}
+
+.coverArt {
+    width: 35px; /* Giảm kích thước ảnh */
+    height: 35px; /* Giảm kích thước ảnh */
+    border-radius: 4px;
+}
+
+.songInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.songName {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em; /* Thu nhỏ cỡ chữ */
+}
+
+.artistName {
+    color: #888;
+    font-size: 0.8em; /* Thu nhỏ cỡ chữ */
+}
+
+.rightControls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    right: 20px;
+    height: 100%; /* Giữ chiều cao để căn giữa theo align-items: center của .controls */
+}
+
+
+/* --- Các thành phần con trong Center Section --- */
+
+.centerTopControls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 5px; 
+}
+
+.centerBottomProgress {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.progressBar {
+    flex: 1; 
+    height: 4px;
+    background: #444;
+    cursor: pointer;
+    position: relative;
+    border-radius: 4px;
+}
+
+.progress {
+    height: 100%;
+    background: rgb(29, 185, 255);
+    box-shadow: 0 0 10px rgba(29, 185, 255, 0.4);
+    transition: none; /* Rất quan trọng: Bỏ transition để kéo trượt mượt mà hơn */
+    border-radius: 4px;
+    position: relative;
+}
+
+.progress::after {
+    content: '';
+    position: absolute;
+    right: -6px; 
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: rgb(29, 185, 255);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(29, 185, 255, 0.8);
+    opacity: 0; 
+    transition: opacity 0.2s ease;
+}
+
+.progressBar:hover .progress::after {
+    opacity: 1; 
+}
+
+/* --- Volume Bar --- */
+
+.volumeBarContainer {
+    display: flex;
+    align-items: center;
+    width: 100px;
+}
+
+.volumeTrack {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: rgb(29, 185, 255);
+    border-radius: 4px;
+    z-index: 1; /* Đảm bảo nằm dưới volumeKnob */
+}
+
+.volumeBar {
+    flex: 1;
+    height: 4px;
+    background: #444; /* Màu nền xám */
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    display: flex; 
+    align-items: center;
+}
+
+
+.volumeKnob {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background: rgb(29, 185, 255);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(29, 185, 255, 0.8);
+    cursor: pointer;
+    margin-left: -6px;
+    transition: none;
+    z-index: 2; /* Đảm bảo nằm trên thanh màu xanh */
+}
+
+/* --- Styling khác --- */
+
+.coverArt { width: 40px; height: 40px; border-radius: 4px; }
+.songInfo { display: flex; flex-direction: column; }
+.songName { color: white; font-weight: bold; }
+.artistName { color: #888; font-size: 0.9em; }
+.time { color: #888; font-size: 0.9em; white-space: nowrap; }
+
+.controlButton, .playButton {
+    /* ... (Giữ nguyên hoặc chỉnh sửa theo ý bạn) ... */
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.playButton {
+    width: 48px;
+    height: 48px;
+    border: 2px solid white;
+    background: white;
+    color: black;
+}
+
+.playButton:hover {
+    background: rgb(29, 185, 255);
+    border-color: rgb(29, 185, 255);
+    color: white;
+}
