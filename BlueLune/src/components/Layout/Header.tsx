@@ -1,6 +1,6 @@
 import React, {useState, useRef ,useEffect} from "react";
 import styles from "../../assets/styles/Header.module.css";
-import avatarImg from "../../assets/images/header/GaoXanh.jpg";
+import avatarImg from "../../../public/images/GaoXanh.jpg";
 import bellIcon from "../../assets/images/header/bell-02.png";
 import homeIcon from "../../assets/images/header/home-02.png";
 import searchIcon from "../../assets/images/header/search-02.png";

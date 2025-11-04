@@ -236,5 +236,26 @@
 
 /* Class để kích hoạt hiệu ứng xoay */
 .spinningCover {
-  animation: spin-slow 15s linear infinite; /* 15s là thời gian 1 vòng quay */
+  animation: spin-slow 10s linear infinite; /* 15s là thời gian 1 vòng quay */
+}
+
+
+@keyframes pulse-icon {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.2); /* Phóng to */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* Tạo một class để áp dụng animation này */
+.pulsingIcon {
+  animation: pulse-icon 1.5s ease-in-out infinite;
 }

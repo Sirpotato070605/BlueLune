@@ -1,6 +1,21 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import styles from '../../assets/styles/PlayerControlBar.module.css';
-import coverArt from '../../assets/images/header/GaoXanh.jpg';
+import coverArt from '../../../public/images/DuoiNhungConMua.jpg';
+
+import { 
+  IoPlay, 
+  IoPause, 
+  IoPlaySkipBack, 
+  IoPlaySkipForward, 
+  IoShuffle, 
+  IoRepeat 
+} from "react-icons/io5";
+import { 
+  MdVolumeUp, 
+  MdVolumeOff, 
+  MdQueueMusic, 
+  MdPictureInPictureAlt 
+} from "react-icons/md"; // Dùng thêm icon Material Design
 
 const DURATION_SECONDS = 300; // Tổng thời gian: 5 phút = 300 giây
 
@@ -17,7 +32,7 @@ const PlayerControlBar: React.FC = () => {
 
   // --- Logic Chạy Thời gian (Timer) ---
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+let interval: ReturnType<typeof setInterval> | null = null;
     
     if (isPlaying && currentTime < duration) {
       interval = setInterval(() => {
@@ -26,7 +41,7 @@ const PlayerControlBar: React.FC = () => {
           // Tự động dừng khi hết bài
           if (newTime >= duration) {
             setIsPlaying(false);
-            clearInterval(interval as NodeJS.Timeout);
+            if (interval) clearInterval(interval);
             return duration; 
           }
           return newTime;
@@ -78,7 +93,7 @@ const PlayerControlBar: React.FC = () => {
     document.addEventListener('mouseup', onMouseUp);
     
     // Xử lý click ban đầu
-    const percent = calculatePosition(e as unknown as MouseEvent, progressBarRef) * 100;
+    const percent = calculatePosition(e.nativeEvent, progressBarRef) * 100;
     const newTime = (percent / 100) * duration;
     setCurrentTime(newTime);
 
@@ -89,7 +104,7 @@ const PlayerControlBar: React.FC = () => {
     if (e.target !== volumeBarRef.current && e.currentTarget !== volumeBarRef.current) return;
     
     const onMouseMove = (moveEvent: MouseEvent) => {
-      const percent = calculatePosition(moveEvent, volumeBarRef) * 100;
+      const percent = calculatePosition(e.nativeEvent, volumeBarRef) * 100;
       setVolumePercent(percent);
     };
 
@@ -134,8 +149,8 @@ const PlayerControlBar: React.FC = () => {
           className={`${styles.coverArt} ${isPlaying ? styles.spinningCover : ''}`}
           />
           <div className={styles.songInfo}>
-            <span className={styles.songName}>Song Name</span>
-            <span className={styles.artistName}>Artist Name</span>
+            <span className={styles.songName}>Dưới Những Cơn Mưa</span>
+            <span className={styles.artistName}>Mr. Siro</span>
           </div>
         </div>
 
@@ -145,23 +160,28 @@ const PlayerControlBar: React.FC = () => {
             <button 
                 className={`${styles.controlButton} ${isShuffled ? styles.activeControl : ''}`} 
                 onClick={() => setIsShuffled(!isShuffled)}
+                title="Shuffle" // Thêm title để giữ trợ năng (accessibility)
             >
-                {/* 🔀 */} Shuffle
+                <IoShuffle size={20} /> {/* Tùy chỉnh kích thước */}
             </button>
             <button className={styles.controlButton} onClick={handlePrevious}>{/* ⏮️ */} Previous</button>
-            <button 
-              className={styles.playButton}
-              onClick={() => setIsPlaying(!isPlaying)}
-            >
-              {isPlaying ? 'Pause' : 'Play'}
-            </button>
+              <button 
+                className={styles.playButton}
+                onClick={() => setIsPlaying(!isPlaying)}
+                title={isPlaying ? 'Pause' : 'Play'}
+              >
+                {/* Thay đổi icon dựa trên state isPlaying */}
+                {isPlaying ? <IoPause size={28} /> : <IoPlay size={28} />}
+              </button>
             <button className={styles.controlButton} onClick={handleNext}>{/* ⏭️ */} Next</button>
-            <button 
-                className={`${styles.controlButton} ${isRepeating > 0 ? styles.activeControl : ''}`}
-                onClick={() => setIsRepeating((isRepeating + 1) % 3)}
-            >
-                {/* 🔁 */} Repeat ({isRepeating})
-            </button>
+              <button 
+                  className={`${styles.controlButton} ${isRepeating > 0 ? styles.activeControl : ''}`}
+                  onClick={() => setIsRepeating((isRepeating + 1) % 3)}
+                  title="Repeat"
+              >
+                  <IoRepeat size={20} />
+                  {/* Bạn có thể thêm logic để hiển thị số (isRepeating) nếu muốn */}
+              </button>
           </div>
           
           <div className={styles.centerBottomProgress}>

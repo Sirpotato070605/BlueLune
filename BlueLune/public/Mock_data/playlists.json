@@ -1,0 +1,14 @@
+[
+  {
+    "id": "pl001",
+    "name": "Bài hát yêu thích",
+    "owner": "Nam Trương",
+    "trackIds": ["t001", "t003"]
+  },
+  {
+    "id": "pl002",
+    "name": "Rap Việt",
+    "owner": "BlueLune",
+    "trackIds": ["t002", "t004"]
+  }
+]
