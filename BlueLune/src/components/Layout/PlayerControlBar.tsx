@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import styles from '../../assets/styles/PlayerControlBar.module.css';
+import coverArt from '../../assets/images/header/GaoXanh.jpg';
 
 const DURATION_SECONDS = 300; // Tổng thời gian: 5 phút = 300 giây
 
@@ -129,7 +130,9 @@ const PlayerControlBar: React.FC = () => {
         
         {/* === PHẦN BÊN TRÁI: Ảnh và Tên Bài hát === */}
         <div className={styles.leftControls}>
-          <img src="../../assets/images/header/GaoXanh.jpg" alt="Cover" className={styles.coverArt} />
+          <img src={coverArt} alt="Cover"
+          className={`${styles.coverArt} ${isPlaying ? styles.spinningCover : ''}`}
+          />
           <div className={styles.songInfo}>
             <span className={styles.songName}>Song Name</span>
             <span className={styles.artistName}>Artist Name</span>
@@ -197,6 +200,12 @@ const PlayerControlBar: React.FC = () => {
                 ref={volumeBarRef}
                 onMouseDown={handleVolumeStart}
             >
+
+            <div 
+                className={styles.volumeTrack} 
+                style={{ width: `${volumePercent}%` }} 
+              />
+
               <div 
                 className={styles.volumeKnob} 
                 style={{ left: `${volumePercent}%` }} 

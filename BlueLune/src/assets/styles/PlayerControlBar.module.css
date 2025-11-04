@@ -213,3 +213,28 @@
     border-color: rgb(29, 185, 255);
     color: white;
 }
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sửa đổi hoặc thêm cho .coverArt */
+.coverArt {
+  width: 50px; /* Điều chỉnh kích thước nếu cần */
+  height: 50px; /* Phải bằng width để tạo hình tròn */
+  border-radius: 50%; /* Làm cho hình ảnh thành hình tròn */
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
+  flex-shrink: 0; /* Ngăn ảnh bị co lại */
+  margin-right: 15px; /* Khoảng cách với tên bài hát */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Tùy chọn: thêm viền */
+}
+
+/* Class để kích hoạt hiệu ứng xoay */
+.spinningCover {
+  animation: spin-slow 15s linear infinite; /* 15s là thời gian 1 vòng quay */
+}
