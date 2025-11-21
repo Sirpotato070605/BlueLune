@@ -15,9 +15,9 @@ import {
   MdVolumeOff, 
   MdQueueMusic, 
   MdPictureInPictureAlt 
-} from "react-icons/md"; // Dùng thêm icon Material Design
+} from "react-icons/md"; 
 
-const DURATION_SECONDS = 300; // Tổng thời gian: 5 phút = 300 giây
+const DURATION_SECONDS = 300; 
 
 const PlayerControlBar: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -29,16 +29,18 @@ const PlayerControlBar: React.FC = () => {
 
   const progressBarRef = useRef<HTMLDivElement>(null);
   const volumeBarRef = useRef<HTMLDivElement>(null);
+  
+  // Ref để lưu trữ âm lượng trước khi mute
+  const previousVolumeRef = useRef(100);
 
   // --- Logic Chạy Thời gian (Timer) ---
   useEffect(() => {
-let interval: ReturnType<typeof setInterval> | null = null;
+    let interval: ReturnType<typeof setInterval> | null = null;
     
     if (isPlaying && currentTime < duration) {
       interval = setInterval(() => {
         setCurrentTime((prevTime) => {
           const newTime = prevTime + 1;
-          // Tự động dừng khi hết bài
           if (newTime >= duration) {
             setIsPlaying(false);
             if (interval) clearInterval(interval);
@@ -51,7 +53,6 @@ let interval: ReturnType<typeof setInterval> | null = null;
       clearInterval(interval);
     }
     
-    // Cleanup function
     return () => {
       if (interval) clearInterval(interval);
     };
@@ -66,17 +67,18 @@ let interval: ReturnType<typeof setInterval> | null = null;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  const calculatePosition = (e: MouseEvent, ref: React.RefObject<HTMLDivElement>) => {
-    if (!ref.current) return 0;
-    const rect = ref.current.getBoundingClientRect();
-    const clientX = e.clientX;
-    const clickX = clientX - rect.left;
-    return Math.min(Math.max(0, clickX / rect.width), 1); // Trả về giá trị từ 0 đến 1
-  };
+const calculatePosition = (e: MouseEvent, ref: React.RefObject<HTMLDivElement | null>) => {
+  if (!ref.current) return 0;
+  const rect = ref.current.getBoundingClientRect();
+  const clientX = e.clientX;
+  const clickX = clientX - rect.left;
+  return Math.min(Math.max(0, clickX / rect.width), 1);
+};
   
   // Xử lý Progress Bar
   const handleProgressStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target !== progressBarRef.current && e.currentTarget !== progressBarRef.current) return;
+    // Chỉ kích hoạt nếu click trực tiếp vào thanh bar
+    if (!progressBarRef.current || !progressBarRef.current.contains(e.target as Node)) return;
     
     const onMouseMove = (moveEvent: MouseEvent) => {
       const percent = calculatePosition(moveEvent, progressBarRef) * 100;
@@ -101,10 +103,10 @@ let interval: ReturnType<typeof setInterval> | null = null;
 
   // Xử lý Volume Bar
   const handleVolumeStart = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target !== volumeBarRef.current && e.currentTarget !== volumeBarRef.current) return;
+    if (!volumeBarRef.current || !volumeBarRef.current.contains(e.target as Node)) return;
     
     const onMouseMove = (moveEvent: MouseEvent) => {
-      const percent = calculatePosition(e.nativeEvent, volumeBarRef) * 100;
+      const percent = calculatePosition(moveEvent, volumeBarRef) * 100;
       setVolumePercent(percent);
     };
 
@@ -116,24 +118,34 @@ let interval: ReturnType<typeof setInterval> | null = null;
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
 
-    // Xử lý click ban đầu
-    const percent = calculatePosition(e as unknown as MouseEvent, volumeBarRef) * 100;
+    const percent = calculatePosition(e.nativeEvent, volumeBarRef) * 100;
     setVolumePercent(percent);
     
   }, []);
   
   // --- Logic Nút Previous và Next ---
   const handlePrevious = () => {
-      setCurrentTime(0); // Reset thời gian về 0
-      setIsPlaying(false); // Dừng phát (tùy chọn)
+      setCurrentTime(0); 
+      setIsPlaying(true); // Tự động play lại
   };
 
   const handleNext = () => {
-      setCurrentTime(duration); // Chuyển đến cuối bài
-      setIsPlaying(false); // Tự động dừng
+      setCurrentTime(duration); 
+      setIsPlaying(false); 
+  };
+
+  // --- Logic Nút Mute ---
+  const toggleMute = () => {
+    if (volumePercent > 0) {
+      previousVolumeRef.current = volumePercent; // Lưu lại âm lượng hiện tại
+      setVolumePercent(0); // Tắt âm
+    } else {
+      // Khôi phục âm lượng (nếu trước đó là 0 thì mặc định 100)
+      setVolumePercent(previousVolumeRef.current > 0 ? previousVolumeRef.current : 100);
+    }
   };
   
-  // Tính toán phần trăm tiến trình
+  // Tính toán phần trăm
   const progressPercent = useMemo(() => {
     return duration > 0 ? (currentTime / duration) * 100 : 0;
   }, [currentTime, duration]);
@@ -143,7 +155,7 @@ let interval: ReturnType<typeof setInterval> | null = null;
     <div className={styles.playerBar}>
       <div className={styles.controls}>
         
-        {/* === PHẦN BÊN TRÁI: Ảnh và Tên Bài hát === */}
+        {/* === PHẦN BÊN TRÁI === */}
         <div className={styles.leftControls}>
           <img src={coverArt} alt="Cover"
           className={`${styles.coverArt} ${isPlaying ? styles.spinningCover : ''}`}
@@ -154,41 +166,43 @@ let interval: ReturnType<typeof setInterval> | null = null;
           </div>
         </div>
 
-        {/* === PHẦN TRUNG TÂM: Nút điều khiển và Progress Bar (CĂN GIỮA) === */}
+        {/* === PHẦN TRUNG TÂM === */}
         <div className={styles.centerSection}>
           <div className={styles.centerTopControls}>
             <button 
                 className={`${styles.controlButton} ${isShuffled ? styles.activeControl : ''}`} 
                 onClick={() => setIsShuffled(!isShuffled)}
-                title="Shuffle" // Thêm title để giữ trợ năng (accessibility)
+                title="Shuffle" 
             >
-                <IoShuffle size={20} /> {/* Tùy chỉnh kích thước */}
+                <IoShuffle size={20} /> 
             </button>
-            <button className={styles.controlButton} onClick={handlePrevious}>{/* ⏮️ */} Previous</button>
+            {/* THAY ĐỔI: Sử dụng Icon */}
+            <button className={styles.controlButton} onClick={handlePrevious} title="Previous">
+                <IoPlaySkipBack size={22} />
+            </button>
               <button 
                 className={styles.playButton}
                 onClick={() => setIsPlaying(!isPlaying)}
                 title={isPlaying ? 'Pause' : 'Play'}
               >
-                {/* Thay đổi icon dựa trên state isPlaying */}
                 {isPlaying ? <IoPause size={28} /> : <IoPlay size={28} />}
               </button>
-            <button className={styles.controlButton} onClick={handleNext}>{/* ⏭️ */} Next</button>
+            {/* THAY ĐỔI: Sử dụng Icon */}
+            <button className={styles.controlButton} onClick={handleNext} title="Next">
+                <IoPlaySkipForward size={22} />
+            </button>
               <button 
                   className={`${styles.controlButton} ${isRepeating > 0 ? styles.activeControl : ''}`}
                   onClick={() => setIsRepeating((isRepeating + 1) % 3)}
                   title="Repeat"
               >
                   <IoRepeat size={20} />
-                  {/* Bạn có thể thêm logic để hiển thị số (isRepeating) nếu muốn */}
               </button>
           </div>
           
           <div className={styles.centerBottomProgress}>
-            {/* Thời gian đã phát */}
             <span className={styles.time}>{formatTime(currentTime)}</span>
             
-            {/* Thanh Progress Bar (Dùng onMouseDown để bắt đầu kéo) */}
             <div 
                 className={styles.progressBar} 
                 ref={progressBarRef} 
@@ -200,32 +214,37 @@ let interval: ReturnType<typeof setInterval> | null = null;
               />
             </div>
             
-            {/* Chỉ hiển thị tổng thời gian bài hát */}
             <span className={styles.time}>
                 {formatTime(duration)}
             </span>
           </div>
         </div>
         
-        {/* === PHẦN BÊN PHẢI: Các nút chức năng và Âm lượng === */}
+        {/* === PHẦN BÊN PHẢI === */}
         <div className={styles.rightControls}>
-          <button className={styles.controlButton}>{/* 📜 */} Lyric</button>
-          <button className={styles.controlButton}>{/* 📱 */} Connect</button>
-          <button className={styles.controlButton}>{/* 🔈 */} Mute</button>
+          {/* THAY ĐỔI: Sử dụng Icon */}
+          <button className={styles.controlButton} title="Queue/Lyrics">
+              <MdQueueMusic size={22} />
+          </button>
           
-          {/* Thanh Âm lượng (Dùng onMouseDown để bắt đầu kéo) */}
+          {/* Nút Connect (Giữ lại vì chưa import icon phù hợp) */}
+          <button className={styles.controlButton} title="Connect to a device">Connect</button>
+          
+          {/* THAY ĐỔI: Sử dụng Icon và logic mute */}
+          <button className={styles.controlButton} onClick={toggleMute} title={volumePercent === 0 ? "Unmute" : "Mute"}>
+            {volumePercent === 0 ? <MdVolumeOff size={22} /> : <MdVolumeUp size={22} />}
+          </button>
+          
           <div className={styles.volumeBarContainer}>
             <div 
                 className={styles.volumeBar} 
                 ref={volumeBarRef}
                 onMouseDown={handleVolumeStart}
             >
-
-            <div 
+              <div 
                 className={styles.volumeTrack} 
                 style={{ width: `${volumePercent}%` }} 
               />
-
               <div 
                 className={styles.volumeKnob} 
                 style={{ left: `${volumePercent}%` }} 
@@ -233,7 +252,10 @@ let interval: ReturnType<typeof setInterval> | null = null;
             </div>
           </div>
           
-          <button className={styles.controlButton}>{/* 🖼️ */} Miniplayer</button>
+          {/* THAY ĐỔI: Sử dụng Icon */}
+          <button className={styles.controlButton} title="Miniplayer">
+              <MdPictureInPictureAlt size={20} />
+          </button>
         </div>
       </div>
     </div>
