@@ -4,7 +4,7 @@
     left: 0;
     width: 100%;
     background-color: #000000;
-    padding: 8px 0; /* Giảm padding tổng thể */
+    padding: 8px 0;
     box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.5);
     z-index: 1000;
 }
@@ -12,22 +12,55 @@
 .controls {
     display: flex;
     justify-content: space-between;
-    align-items: center; /* Đảm bảo căn giữa theo chiều dọc cho toàn bộ khu vực */
-    height: 50px; /* Giảm chiều cao cố định của khu vực controls */
+    align-items: center;
+    height: 60px;
     padding: 0 20px;
     position: relative;
 }
 
-.controls {
+/* === LEFT SECTION === */
+.leftControls {
     display: flex;
-    justify-content: space-between;
-    align-items: center; /* Căn giữa theo chiều dọc */
-    height: 60px; /* Đặt chiều cao cố định cho khu vực controls */
-    padding: 0 20px;
-    position: relative; /* Quan trọng cho việc căn giữa tuyệt đối */
+    align-items: center;
+    gap: 10px;
+    position: absolute; 
+    left: 20px;
+    max-width: 25%; /* Giới hạn chiều rộng để không đè vào giữa */
 }
 
-/* === Căn giữa tuyệt đối cho khu vực TRUNG TÂM === */
+.coverArt {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Hoặc 50% nếu muốn tròn */
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.songInfo {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Ẩn text nếu quá dài */
+}
+
+.songName {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.artistName {
+    color: #888;
+    font-size: 0.8em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* === CENTER SECTION === */
 .centerSection {
     position: absolute;
     left: 50%;
@@ -35,62 +68,19 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    max-width: 650px;
+    width: 40%;
+    max-width: 600px;
 }
-
-/* Khu vực còn lại (Left & Right) */
-
-.leftControls {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Giảm khoảng cách */
-    position: absolute; 
-    left: 20px;
-}
-
-.coverArt {
-    width: 35px; /* Giảm kích thước ảnh */
-    height: 35px; /* Giảm kích thước ảnh */
-    border-radius: 4px;
-}
-
-.songInfo {
-    display: flex;
-    flex-direction: column;
-}
-
-.songName {
-    color: white;
-    font-weight: bold;
-    font-size: 0.9em; /* Thu nhỏ cỡ chữ */
-}
-
-.artistName {
-    color: #888;
-    font-size: 0.8em; /* Thu nhỏ cỡ chữ */
-}
-
-.rightControls {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: absolute;
-    right: 20px;
-    height: 100%; /* Giữ chiều cao để căn giữa theo align-items: center của .controls */
-}
-
-
-/* --- Các thành phần con trong Center Section --- */
 
 .centerTopControls {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 15px; /* Giảm gap chút để gọn hơn */
     margin-bottom: 5px; 
 }
 
+/* --- Progress Bar --- */
 .centerBottomProgress {
     display: flex;
     align-items: center;
@@ -98,20 +88,27 @@
     gap: 10px;
 }
 
+.time { 
+    color: #a7a7a7; 
+    font-size: 0.8em; 
+    font-variant-numeric: tabular-nums; 
+    min-width: 35px;
+    text-align: center;
+}
+
 .progressBar {
     flex: 1; 
     height: 4px;
-    background: #444;
+    background: #4d4d4d; /* Nền xám tối */
     cursor: pointer;
-    position: relative;
     border-radius: 4px;
+    position: relative;
 }
 
+/*Trắng hơi xanh dương (#def6ff) */
 .progress {
     height: 100%;
-    background: rgb(29, 185, 255);
-    box-shadow: 0 0 10px rgba(29, 185, 255, 0.4);
-    transition: none; /* Rất quan trọng: Bỏ transition để kéo trượt mượt mà hơn */
+    background: #def6ff; 
     border-radius: 4px;
     position: relative;
 }
@@ -124,9 +121,9 @@
     transform: translateY(-50%);
     width: 12px;
     height: 12px;
-    background: rgb(29, 185, 255);
+    background: #ffffff; /* Knob màu trắng sáng */
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(29, 185, 255, 0.8);
+    box-shadow: 0 0 5px rgba(222, 246, 255, 0.5);
     opacity: 0; 
     transition: opacity 0.2s ease;
 }
@@ -135,12 +132,36 @@
     opacity: 1; 
 }
 
-/* --- Volume Bar --- */
+/* === RIGHT SECTION === */
+.rightControls {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Giảm gap để chứa đủ các nút mới */
+    position: absolute;
+    right: 20px;
+    height: 100%;
+}
+
+/* --- Volume Area --- */
+.volumeWrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
 .volumeBarContainer {
     display: flex;
     align-items: center;
-    width: 100px;
+    width: 80px; /* Thu nhỏ thanh volume một chút cho responsive */
+}
+
+.volumeBar {
+    flex: 1;
+    height: 4px;
+    background: #4d4d4d;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
 }
 
 .volumeTrack {
@@ -148,22 +169,10 @@
     top: 0;
     left: 0;
     height: 100%;
-    background: rgb(29, 185, 255);
+    background: #def6ff; /* Màu mới */
     border-radius: 4px;
-    z-index: 1; /* Đảm bảo nằm dưới volumeKnob */
+    z-index: 1;
 }
-
-.volumeBar {
-    flex: 1;
-    height: 4px;
-    background: #444; /* Màu nền xám */
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-    display: flex; 
-    align-items: center;
-}
-
 
 .volumeKnob {
     position: absolute;
@@ -171,91 +180,68 @@
     transform: translateY(-50%);
     width: 12px;
     height: 12px;
-    background: rgb(29, 185, 255);
+    background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 10px rgba(29, 185, 255, 0.8);
-    cursor: pointer;
     margin-left: -6px;
-    transition: none;
-    z-index: 2; /* Đảm bảo nằm trên thanh màu xanh */
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s;
 }
 
-/* --- Styling khác --- */
+.volumeBarContainer:hover .volumeKnob {
+    opacity: 1;
+}
 
-.coverArt { width: 40px; height: 40px; border-radius: 4px; }
-.songInfo { display: flex; flex-direction: column; }
-.songName { color: white; font-weight: bold; }
-.artistName { color: #888; font-size: 0.9em; }
-.time { color: #888; font-size: 0.9em; white-space: nowrap; }
-
-.controlButton, .playButton {
-    /* ... (Giữ nguyên hoặc chỉnh sửa theo ý bạn) ... */
+/* === BUTTON STYLES === */
+.controlButton {
     background: transparent;
     border: none;
-    color: white;
+    color: #b3b3b3; /* Màu mặc định xám nhạt */
     cursor: pointer;
-    padding: 8px;
+    padding: 6px;
     border-radius: 50%;
-    transition: all 0.3s ease;
-    font-size: 14px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controlButton:hover {
+    color: white;
+    transform: scale(1.1);
+}
+
+/* --- Active State (Cho Repeat, Shuffle) --- */
+.activeControl {
+    color: #def6ff !important; /* Màu sáng khi active */
+    text-shadow: 0 0 8px rgba(222, 246, 255, 0.4);
 }
 
 .playButton {
-    width: 48px;
-    height: 48px;
-    border: 2px solid white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: none;
     background: white;
     color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .playButton:hover {
-    background: rgb(29, 185, 255);
-    border-color: rgb(29, 185, 255);
-    color: white;
+    transform: scale(1.05);
+    background: #def6ff; /* Hover nút play cũng đổi màu nhẹ */
+}
+
+/* Animation quay đĩa */
+.spinningCover {
+    animation: spin-slow 10s linear infinite;
 }
 
 @keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Sửa đổi hoặc thêm cho .coverArt */
-.coverArt {
-  width: 50px; /* Điều chỉnh kích thước nếu cần */
-  height: 50px; /* Phải bằng width để tạo hình tròn */
-  border-radius: 50%; /* Làm cho hình ảnh thành hình tròn */
-  object-fit: cover; /* Đảm bảo ảnh không bị méo */
-  flex-shrink: 0; /* Ngăn ảnh bị co lại */
-  margin-right: 15px; /* Khoảng cách với tên bài hát */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Tùy chọn: thêm viền */
-}
-
-/* Class để kích hoạt hiệu ứng xoay */
-.spinningCover {
-  animation: spin-slow 10s linear infinite; /* 15s là thời gian 1 vòng quay */
-}
-
-
-@keyframes pulse-icon {
-  0% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.2); /* Phóng to */
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-}
-
-/* Tạo một class để áp dụng animation này */
-.pulsingIcon {
-  animation: pulse-icon 1.5s ease-in-out infinite;
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }

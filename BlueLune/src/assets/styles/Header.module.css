@@ -31,12 +31,11 @@
 }
 
 /* ==================== COMMON ICON BUTTONS ==================== */
-/* (Home, Album, Bell) */
 
 .homeButton, 
 .albumButton, 
 .bellButton {
-  background: #1f1f1f; /* Màu xám gốc */
+  background: #1f1f1f; 
   border: none;
   height: 40px;
   width: 40px; 
@@ -60,14 +59,13 @@
 }
 
 /* --- HIỆU ỨNG HOVER MỚI --- */
-/* Bỏ màu xanh, chỉ phóng to và làm sáng nền xám */
 .homeButton:hover, 
 .albumButton:hover, 
 .bellButton:hover {
-  transform: scale(1.1); /* Phóng to một xíu */
-  background-color: #404040; /* Màu xám sáng hơn (~50%) */
-  color: white; /* Giữ nguyên màu icon trắng */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Bóng đen nhẹ để nổi bật */
+  transform: scale(1.1); 
+  background-color: #404040; 
+  color: white; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
 
 /* Layout spacing */
@@ -90,7 +88,7 @@
   height: 36px;
   padding: 0 12px;
   border-radius: 20px;
-  background: #1f1f1f; /* Màu xám gốc */
+  background: #1f1f1f; 
   color: white;
   border: 1px solid transparent; /* Giữ chỗ cho border để không bị nhảy layout */
   transition: all 0.2s ease-in-out;
@@ -125,14 +123,14 @@
 /* --- Hiệu ứng Hover cho Search Bar --- */
 .searchArea:hover,
 .searchArea:focus-within {
-  transform: scale(1.02); /* Phóng to nhẹ */
-  background-color: #404040; /* Làm sáng nền */
+  transform: scale(1.02); 
+  background-color: #404040; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .searchArea:hover .searchButton,
 .searchArea:focus-within .searchButton {
-  color: white; /* Icon sáng lên màu trắng */
+  color: white; 
 }
 
 .searchArea:focus-within input::placeholder {
@@ -182,10 +180,9 @@
   background-color: #333333; /* Nền xám nhẹ khi hover */
   transform: scale(1.02);
 }
-/* Không đổi màu chữ hay avatar, giữ nguyên vẻ tối giản */
 
 
-/* Animation xoay avatar (giữ nguyên nếu bạn thích) */
+/* Animation xoay avatar */
 .avatar.spin {
   animation: spin-slow 30s linear infinite;
 }
@@ -214,10 +211,10 @@
   transition: all 0.2s ease;
 }
 
-/* Hiệu ứng hover cho nút Auth: Phóng to và sáng hơn */
+/* Hiệu ứng hover cho nút Auth */
 .authButtons button:hover {
   transform: scale(1.05);
-  filter: brightness(0.9); /* Làm dịu màu trắng một chút cho đỡ chói */
+  filter: brightness(0.9); 
 }
 
 .authButtons:hover button:not(:hover) {
@@ -259,7 +256,7 @@
 }
 
 .dropdownMenu button:hover {
-  background: rgba(255, 255, 255, 0.1); /* Nền sáng nhẹ */
+  background: rgba(255, 255, 255, 0.1); 
   color: white;
   padding-left: 18px;
 }
