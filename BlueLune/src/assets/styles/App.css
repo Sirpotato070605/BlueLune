@@ -1,4 +1,27 @@
-.body {
-  font: 1em sans-serif;
-  margin: 0;
+/* Container chính */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000000;
+  color: white;
+}
+
+/* Phần thân chứa Content và Sidebar */
+.main-body {
+  display: flex; /* QUAN TRỌNG: Để xếp content và sidebar nằm ngang */
+  flex: 1; 
+  margin-top: 60px; /* Tránh header che */
+  margin-bottom: 76px; /* Tránh control bar che (60px + padding) */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Khu vực nội dung chính */
+.content-area {
+  flex: 1; /* Tự động mở rộng */
+  padding: 20px;
+  overflow-y: auto;
+  background: linear-gradient(to bottom, #121212, #000000);
 }

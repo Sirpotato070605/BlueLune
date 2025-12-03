@@ -4,27 +4,33 @@
   flex-direction: column;
   background-color: #121212;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
-  height: 100%; /* Full chiều cao của parent */
   
-  /* Yêu cầu kích thước: Min 1/6 (16.66%), Max 1/4 (25%) */
-  width: 25%; /* Mặc định là Max */
+  height: 100%; 
+  
+  /* Yêu cầu kích thước */
+  width: 25%;
   min-width: 16.66vw;
   max-width: 25vw;
   
-  /* Yêu cầu cách Header 10px */
+  /* Cách Header 10px */
   margin-top: 10px;
-  border-top-left-radius: 8px; /* Bo góc nhẹ cho đẹp nếu muốn tách biệt */
+  border-top-left-radius: 12px;
   
-  transition: all 0.3s ease; /* Hiệu ứng mượt khi phóng to/thu nhỏ */
-  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+  
+  overflow: hidden;  /* Ngăn cuộn bên ngoài */
+
 }
 
-/* Trạng thái phóng to (chiếm toàn bộ content area) */
+/* Trạng thái phóng to */
 .maximized {
   width: 100% !important;
   max-width: 100% !important;
   border-left: none;
-  z-index: 10; /* Đè lên content chính */
+  z-index: 10;
+  border-top-left-radius: 0;
+  margin-top: 0; /* Khi phóng to thì bỏ margin để full màn hình đẹp hơn */
+  height: 100%;  /* Full chiều cao khi phóng to */
 }
 
 /* --- Header Controls --- */
@@ -32,8 +38,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
-  /* background-color: rgba(255, 255, 255, 0.05); */
+  padding: 15px 20px; /* Tăng padding chút cho thoáng */
+  flex-shrink: 0; /* Ngăn header bị co lại khi nội dung dài */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .iconBtn {
@@ -41,7 +48,7 @@
   border: none;
   color: #b3b3b3;
   cursor: pointer;
-  padding: 5px;
+  padding: 8px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -52,22 +59,39 @@
 .iconBtn:hover {
   background-color: rgba(255, 255, 255, 0.1);
   color: white;
+  transform: scale(1.1);
 }
 
-/* --- Scrollable Content --- */
+/* --- QUAN TRỌNG: Scrollable Content --- */
+/* Phần này sẽ cuộn độc lập bên trong khung cố định */
 .scrollContent {
-  flex: 1;
-  overflow-y: auto;
+  flex: 1; /* Chiếm toàn bộ không gian còn lại bên dưới header */
+  overflow-y: auto; /* Chỉ hiện thanh cuộn dọc cho phần này */
+  overflow-x: hidden;
   padding: 0 20px 20px 20px;
   
-  /* Custom Scrollbar */
+  /* Tùy chỉnh thanh cuộn cho đẹp */
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
-/* --- 1. Cover Art --- */
+/* Style cho thanh cuộn trên Webkit (Chrome/Edge/Safari) */
+.scrollContent::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollContent::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.scrollContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* --- Các phần còn lại giữ nguyên như cũ --- */
 .coverSection {
-  margin-bottom: 20px;
+  margin: 20px 0;
   display: flex;
   justify-content: center;
 }
@@ -75,12 +99,11 @@
 .largeCover {
   width: 100%;
   aspect-ratio: 1/1;
-  border-radius: 8px;
+  border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
-/* --- 2. Track Header & Actions --- */
 .trackHeader {
   display: flex;
   justify-content: space-between;
@@ -90,7 +113,7 @@
 
 .trackInfoMain {
   flex: 1;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
 .songTitle {
@@ -99,6 +122,7 @@
   margin: 0 0 5px 0;
   color: white;
   word-break: break-word;
+  line-height: 1.2;
 }
 
 .artistName {
@@ -109,7 +133,8 @@
 
 .actions {
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  padding-top: 5px;
 }
 
 .actionBtn {
@@ -118,47 +143,48 @@
   color: #b3b3b3;
   cursor: pointer;
   padding: 0;
-  transition: color 0.2s;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 .actionBtn:hover {
-  color: #def6ff; /* Màu xanh sáng chủ đạo */
+  color: #def6ff;
   transform: scale(1.1);
+  filter: drop-shadow(0 0 5px rgba(222, 246, 255, 0.3));
 }
 
-/* --- 3. Credit --- */
 .creditSection {
   background-color: rgba(255, 255, 255, 0.05);
   padding: 15px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 20px;
 }
 
 .creditSection h3 {
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  color: white;
+  letter-spacing: 1px;
+  color: #888;
   margin: 0 0 10px 0;
 }
 
 .creditSection p {
-  font-size: 0.85rem;
-  color: #b3b3b3;
+  font-size: 0.9rem;
+  color: #ddd;
   margin: 5px 0;
 }
 
-/* --- 4. Next in Queue --- */
 .queueSection {
-  background-color: rgba(255, 255, 255, 0.02); /* Nhạt hơn credit chút */
-  border-radius: 8px;
-  padding: 15px;
+  /* background-color: rgba(255, 255, 255, 0.02); */
+  padding-top: 10px;
 }
 
 .queueHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .queueHeader h3 {
@@ -172,6 +198,7 @@
   font-size: 0.8rem;
   color: #b3b3b3;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .seeAll:hover {
@@ -182,10 +209,11 @@
 .queueItem {
   display: flex;
   align-items: center;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 10px;
+  border-radius: 8px;
   transition: background 0.2s;
   cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .queueItem:hover {
@@ -193,26 +221,29 @@
 }
 
 .queueIcon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   background: #333;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
-  margin-right: 10px;
-  font-size: 0.8rem;
+  border-radius: 6px;
+  margin-right: 12px;
+  font-size: 1rem;
+  color: #888;
 }
 
 .queueInfo {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .queueTitle {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: white;
+  margin-bottom: 2px;
 }
 
 .queueArtist {
