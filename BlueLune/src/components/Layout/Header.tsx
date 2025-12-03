@@ -1,11 +1,16 @@
 import React, {useState, useRef ,useEffect} from "react";
 import styles from "../../assets/styles/Header.module.css";
 import avatarImg from "../../../public/images/GaoXanh.jpg";
-import bellIcon from "../../assets/images/header/bell-02.png";
-import homeIcon from "../../assets/images/header/home-02.png";
-import searchIcon from "../../assets/images/header/search-02.png";
-import albumIcon from "../../assets/images/header/album-02.png";
+// bỏ ảnh icon cũ
+// import bellIcon from "../../assets/images/header/bell-02.png";
+// import homeIcon from "../../assets/images/header/home-02.png";
+// import searchIcon from "../../assets/images/header/search-02.png";
+// import albumIcon from "../../assets/images/header/album-02.png";
 
+
+
+// import icon mới từ react
+import { IoHome, IoAlbums, IoSearch, IoNotifications } from 'react-icons/io5';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -44,14 +49,14 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
       <div className={styles.homeButtonArea}>
         <button className={styles.homeButton}>
-          <img src={homeIcon} alt="Home Icon" />
+          <IoHome size={22} />
         </button>
       </div>
 
       {/* ======================= ALBUM BUTTON AREA ====================== */} 
       <div className={styles.albumButtonArea}>
         <button className={styles.albumButton}>
-          <img src={albumIcon} alt="Album Icon" />
+          <IoAlbums size={22} />
         </button>
       </div>
       {/* ======================= SEARCH AREA ====================== */}
@@ -64,7 +69,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           onChange={(e) => onSearch(e.target.value)}
         />
         <button className={styles.searchButton}>
-          <img src={searchIcon} alt="Search Icon" />
+          <IoSearch size={20} />
         </button>
       </div>
 
@@ -72,7 +77,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
       <div className={styles.notificationBell}>
         <button className={styles.bellButton}>
-          <img src={bellIcon} alt="Notificcation Bell" />
+          <IoNotifications size={22} />
         </button>
       </div>
 
