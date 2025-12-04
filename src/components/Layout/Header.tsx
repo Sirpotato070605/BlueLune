@@ -2,10 +2,8 @@ import React, {useState, useRef ,useEffect} from "react";
 import styles from "../../assets/styles/Header.module.css";
 import avatarImg from "../../../public/images/GaoXanh.jpg";
 
-
-
-
-import { IoHome, IoAlbums, IoSearch, IoNotifications } from 'react-icons/io5';
+import { GoHomeFill } from "react-icons/go";
+import { IoAlbums, IoSearch, IoNotifications } from 'react-icons/io5';
 
 interface HeaderProps {
   onSearch: (query: string) => void;
@@ -42,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
 
       <div className={styles.homeButtonArea}>
         <button className={styles.homeButton}>
-          <IoHome size={22} />
+          <GoHomeFill size={22} />
         </button>
       </div>
 

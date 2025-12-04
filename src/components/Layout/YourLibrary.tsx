@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styles from '../../assets/styles/YourLibrary.module.css';
-import { IoLibrary} from "react-icons/io5";
+import { LuLibraryBig } from "react-icons/lu";
 import { ALBUMS } from '../../data/mockData';
 
 interface YourLibraryProps {
@@ -49,7 +49,7 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
           onClick={onToggle} 
           title={isCollapsed ? "Mở rộng" : "Thu gọn"}
         >
-          <IoLibrary size={24} className={styles.icon} />
+          <LuLibraryBig size={24} className={styles.icon} />
           {!isCollapsed && <span className={styles.text}>Your Library</span>}
         </div>
         
