@@ -22,13 +22,11 @@ import {
 
 const DURATION_SECONDS = 300; 
 
-// 1. Thêm Interface định nghĩa Props
 interface PlayerControlBarProps {
   onToggleSidebar: () => void; 
   isSidebarOpen: boolean;      
 }
 
-// 2. Nhận props vào component
 const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ onToggleSidebar, isSidebarOpen }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -41,7 +39,6 @@ const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ onToggleSidebar, is
   const volumeBarRef = useRef<HTMLDivElement>(null);
   const previousVolumeRef = useRef(100);
 
-  // --- Logic Timer ---
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | null = null;
     if (isPlaying && currentTime < duration) {
@@ -54,7 +51,6 @@ const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ onToggleSidebar, is
     return () => { if (interval) clearInterval(interval); };
   }, [isPlaying, currentTime, duration]);
 
-  // --- Logic Drag & Drop (Giữ nguyên) ---
   const formatTime = (time: number) => {
     const min = Math.floor(time / 60);
     const sec = Math.floor(time % 60);
@@ -113,7 +109,6 @@ const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ onToggleSidebar, is
     <div className={styles.playerBar}>
       <div className={styles.controls}>
         
-        {/* LEFT & CENTER (Giữ nguyên) */}
         <div className={styles.leftControls}>
           <img src={coverArt} alt="Cover" className={`${styles.coverArt} ${isPlaying ? styles.spinningCover : ''}`} />
           <div className={styles.songInfo}>
@@ -124,7 +119,12 @@ const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ onToggleSidebar, is
 
         <div className={styles.centerSection}>
           <div className={styles.centerTopControls}>
-            <button className={`${styles.controlButton} ${isShuffled ? styles.activeControl : ''}`} onClick={() => setIsShuffled(!isShuffled)} title="Shuffle"><IoShuffle size={20} /></button>
+
+            <button className={`${styles.controlButton} 
+            ${isShuffled ? styles.activeControl : ''}`} 
+            onClick={() => setIsShuffled(!isShuffled)} 
+            title="Shuffle"><IoShuffle size={20} /></button>
+
             <button className={styles.controlButton} onClick={() => { setCurrentTime(0); setIsPlaying(true); }} title="Previous"><IoPlaySkipBack size={22} /></button>
             <button className={styles.playButton} onClick={() => setIsPlaying(!isPlaying)} title={isPlaying ? 'Pause' : 'Play'}>
               {isPlaying ? <IoPause size={28} /> : <IoPlay size={28} />}
@@ -142,10 +142,9 @@ const PlayerControlBar: React.FC<PlayerControlBarProps> = ({ onToggleSidebar, is
           </div>
         </div>
         
-        {/* RIGHT SECTION: Cập nhật nút View Sidebar */}
+    
         <div className={styles.rightControls}>
           
-          {/* 3. Gắn sự kiện onClick vào nút này */}
           <button 
             className={`${styles.controlButton} ${isSidebarOpen ? styles.activeControl : ''}`} 
             title="Now Playing View"

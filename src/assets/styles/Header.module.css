@@ -3,18 +3,20 @@
   align-items: center;
   justify-content: space-between;
   background-color: #000000;
-  padding: 10px 20px;
+  padding: 8px 20px; 
+  height: 50px; 
   width: 100%;
   position: fixed;
   margin: 0;
   top: 0;
   left: 0;
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 9999; 
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .logo {
-  font-size: 1.8em;
+  font-size: 1.5em; 
   font-weight: bold;
   margin-right: auto;
   cursor: pointer;
@@ -34,8 +36,8 @@
 .bellButton {
   background: #1f1f1f; 
   border: none;
-  height: 40px;
-  width: 40px; 
+  height: 36px; 
+  width: 36px;  
   cursor: pointer;
   border-radius: 50%;
   display: flex;
@@ -46,31 +48,17 @@
   margin: 0 5px;
 }
 
-.homeButton svg, 
-.albumButton svg, 
-.bellButton svg {
-  width: 22px;
-  height: 22px;
-  display: block;
+
+.homeButtonArea { 
+  margin-left: 20px; 
+  margin-right: 15px; 
 }
 
-.homeButton:hover, 
-.albumButton:hover, 
-.bellButton:hover {
-  transform: scale(1.1); 
-  background-color: #404040; 
-  color: white; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+.albumButtonArea { 
+  margin-right: 15px; 
 }
 
-.homeButtonArea {
-  margin-left: 20px;
-  margin-right: 15px;
-}
-.albumButtonArea {
-  margin-right: 15px;
-}
-.notificationBell {
+.notificationBell { 
   margin-left: 15px;
 }
 
@@ -78,7 +66,7 @@
   display: flex;
   align-items: center;
   width: 300px;
-  height: 36px;
+  height: 32px; 
   padding: 0 12px;
   border-radius: 20px;
   background: #1f1f1f; 
@@ -97,168 +85,167 @@
   font-size: 14px;
 }
 
-.searchArea input::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-  transition: color 0.2s ease;
+.searchArea input::placeholder { 
+  color: rgba(255, 255, 255, 0.5); 
+  transition: color 0.2s ease; 
 }
 
-.searchButton {
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
+.searchButton { 
+  background: transparent; 
+  border: none; 
+  color: rgba(255, 255, 255, 0.7); 
+  cursor: pointer; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  transition: color 0.2s ease; 
 }
 
-.searchArea:hover,
-.searchArea:focus-within {
+.searchArea:hover, .searchArea:focus-within { 
   transform: scale(1.02); 
   background-color: #404040; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
 
-.searchArea:hover .searchButton,
-.searchArea:focus-within .searchButton {
+.searchArea:hover .searchButton, 
+.searchArea:focus-within .searchButton { 
   color: white; 
 }
 
-.searchArea:focus-within input::placeholder {
-  color: rgba(255, 255, 255, 0.8);
+.searchArea:focus-within input::placeholder { 
+  color: rgba(255, 255, 255, 0.8); 
 }
 
 .userArea {
-  margin-left: 20px;
-  margin-right: 10px;
-  font-size: large;
-  position: relative;
+  margin-left: 20px; 
+  margin-right: 10px; 
+  font-size: large; 
+  position: relative; 
 }
 
-.userInfo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.userInfo { 
+  display: flex; 
+  align-items: 
+  center; gap: 10px; 
 }
 
-
-.userProfile {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 30px;
-  transition: all 0.2s ease;
-  background: transparent;
+.userProfile { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  cursor: pointer; 
+  padding: 5px 10px; 
+  border-radius: 30px; 
+  transition: all 0.2s ease; 
+  background: transparent; 
 }
 
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
+.avatar { 
+  width: 32px;
+  height: 32px; 
+  border-radius: 50%; 
+  object-fit: cover; 
+
 }
 
-.userName {
-  font-weight: 500;
-  color: white;
+.userName { 
+  font-weight: 500; 
+  color: white; 
+  font-size: 0.9em; 
 }
 
-
-.userProfile:hover {
+.userProfile:hover { 
   background-color: #333333; 
-  transform: scale(1.02);
+  transform: scale(1.02); 
+}
+
+.avatar.spin { 
+  animation: spin-slow 30s linear infinite; 
+}
+
+@keyframes 
+spin-slow { 
+  from { transform: rotate(0deg); } 
+  to { transform: rotate(360deg); } 
+}
+
+.authButtons { 
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
 }
 
 
-
-.avatar.spin {
-  animation: spin-slow 30s linear infinite;
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-
-.authButtons {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.authButtons button {
-  color: #000000;
-  background-color: white;
-  width: 90px;
-  height: 40px;
-  font-weight: bold;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.authButtons button { 
+  color: #000000; 
+  background-color: white; 
+  width: 80px; 
+  height: 32px; 
+  font-weight: bold; 
+  border: none; 
+  border-radius: 20px; 
+  cursor: pointer; 
+  transition: all 0.2s ease; 
 }
 
 
-.authButtons button:hover {
-  transform: scale(1.05);
+.authButtons button:hover { 
+  transform: scale(1.05); 
   filter: brightness(0.9); 
 }
 
-.authButtons:hover button:not(:hover) {
-  opacity: 0.7;
-  transform: scale(0.95);
+.authButtons:hover button:not(:hover) { 
+  opacity: 0.7; 
+  transform: scale(0.95); 
 }
 
 
-.dropdownMenu {
-  position: absolute;
-  top: 120%;
-  right: 0;
-  width: 200px;
-  background: #1f1f1f;
-  border-radius: 12px;
-  padding: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+.dropdownMenu { 
+  position: absolute; 
+  top: 120%; 
+  right: 0; 
+  width: 200px; 
+  background: #1f1f1f; 
+  border-radius: 12px; 
+  padding: 8px; 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); 
   border: 1px solid rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-  animation: fadeIn 0.2s ease-out;
+  overflow: hidden; 
+  animation: fadeIn 0.2s ease-out; 
+  z-index: 10000; 
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes 
+fadeIn { 
+  from { opacity: 0; transform: translateY(-10px); } 
+  to { opacity: 1; transform: translateY(0); } 
 }
-
-.dropdownMenu button {
-  width: 100%;
-  padding: 12px 15px;
-  text-align: left;
-  background: transparent;
-  border: none;
+.dropdownMenu button { 
+  width: 100%; 
+  padding: 12px 15px; 
+  text-align: left; 
+  background: transparent; 
+  border: none; 
   color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  border-radius: 8px;
-  font-size: 14px;
+  cursor: pointer; 
+  transition: all 0.2s ease; 
+  border-radius: 8px; 
+  font-size: 14px; 
 }
 
-.dropdownMenu button:hover {
+.dropdownMenu button:hover { 
   background: rgba(255, 255, 255, 0.1); 
-  color: white;
-  padding-left: 18px;
+  color: white; 
+  padding-left: 18px; 
 }
 
-.divider {
-  margin: 5px 0;
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+.divider { 
+  margin: 5px 0; 
+  border: none; 
+  border-top: 1px solid rgba(255, 255, 255, 0.1); 
 }
 
-.logoutBtn:hover {
-  background: rgba(255, 68, 68, 0.15) !important;
-  color: #ff4444 !important;
+.logoutBtn:hover { 
+  background: rgba(255, 68, 68, 0.15) !important; 
+  color: #ff4444 !important; 
 }

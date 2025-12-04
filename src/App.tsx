@@ -1,5 +1,4 @@
-// src/App.tsx
-import { useState } from 'react'; // Xóa useEffect
+import { useState, useEffect } from 'react';
 import '../src/assets/styles/App.css';
 import Header from './components/Layout/Header.tsx';
 import PlayerControlBar from './components/Layout/PlayerControlBar.tsx';
@@ -12,8 +11,20 @@ function App() {
   const [isPlayerMaximized, setIsPlayerMaximized] = useState(false);
   const [isLibraryCollapsed, setIsLibraryCollapsed] = useState(false);
 
-  // ĐÃ XÓA: useEffect(() => { if (isRightSidebarOpen) ... }) 
-  // Để Library không tự động thu nhỏ nữa.
+  useEffect(() => {
+    if (isPlayerMaximized) {
+      setIsLibraryCollapsed(true);
+    }
+  }, [isPlayerMaximized]);
+
+  const handleCloseRightSidebar = () => {
+    setIsRightSidebarOpen(false);
+    setIsPlayerMaximized(false);
+  };
+
+  const handleToggleMaximize = () => {
+    setIsPlayerMaximized(!isPlayerMaximized);
+  };
 
   return (
     <div className="app-container">
@@ -21,35 +32,34 @@ function App() {
 
       <div className="main-body">
         
-        {/* PHẦN 1: YOUR LIBRARY (Resizable) */}
         <YourLibrary 
-          isCollapsed={isLibraryCollapsed} 
+          isCollapsed={isPlayerMaximized ? true : isLibraryCollapsed} 
           onToggle={() => setIsLibraryCollapsed(!isLibraryCollapsed)}
         />
 
-        {/* PHẦN 2: MAIN PAGE */}
-        <div 
-          className="content-area main-page-wrapper" 
-          style={{ display: isPlayerMaximized ? 'none' : 'block' }}
-        >
-          <Home />
-        </div>
+        {!isPlayerMaximized && (
+          <div className="content-area main-page-wrapper">
+            <Home />
+          </div>
+        )}
 
-        {/* PHẦN 3: EPFC / RIGHT SIDEBAR */}
         {isRightSidebarOpen && (
           <NowPlayingView 
-            onClose={() => {
-              setIsRightSidebarOpen(false);
-              setIsPlayerMaximized(false);
-            }} 
-            // isMaximized={isPlayerMaximized}
-            // onToggleMaximize={() => setIsPlayerMaximized(!isPlayerMaximized)}
+            onClose={handleCloseRightSidebar} 
+            isMaximized={isPlayerMaximized}
+            onToggleMaximize={handleToggleMaximize}
           />
         )}
       </div>
 
       <PlayerControlBar 
-        onToggleSidebar={() => setIsRightSidebarOpen(!isRightSidebarOpen)} 
+        onToggleSidebar={() => {
+            if (isRightSidebarOpen) {
+                handleCloseRightSidebar();
+            } else {
+                setIsRightSidebarOpen(true);
+            }
+        }} 
         isSidebarOpen={isRightSidebarOpen} 
       />
     </div>

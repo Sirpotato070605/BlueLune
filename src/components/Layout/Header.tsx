@@ -1,15 +1,10 @@
 import React, {useState, useRef ,useEffect} from "react";
 import styles from "../../assets/styles/Header.module.css";
 import avatarImg from "../../../public/images/GaoXanh.jpg";
-// bỏ ảnh icon cũ
-// import bellIcon from "../../assets/images/header/bell-02.png";
-// import homeIcon from "../../assets/images/header/home-02.png";
-// import searchIcon from "../../assets/images/header/search-02.png";
-// import albumIcon from "../../assets/images/header/album-02.png";
 
 
 
-// import icon mới từ react
+
 import { IoHome, IoAlbums, IoSearch, IoNotifications } from 'react-icons/io5';
 
 interface HeaderProps {
@@ -43,9 +38,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
     <header className={styles.header}>
 
 
-      <div className={styles.logo}>BlueLune</div>
-
-      {/* ======================= HOME BUTTON AREA ====================== */}
+      <div className={styles.logo}>Teall</div>
 
       <div className={styles.homeButtonArea}>
         <button className={styles.homeButton}>
@@ -53,13 +46,11 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         </button>
       </div>
 
-      {/* ======================= ALBUM BUTTON AREA ====================== */} 
       <div className={styles.albumButtonArea}>
         <button className={styles.albumButton}>
           <IoAlbums size={22} />
         </button>
       </div>
-      {/* ======================= SEARCH AREA ====================== */}
 
       <div className={styles.searchArea}>
         <input
@@ -72,8 +63,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
           <IoSearch size={20} />
         </button>
       </div>
-
-{/*  ================= Notification Bell ====================== */} 
+ 
 
       <div className={styles.notificationBell}>
         <button className={styles.bellButton}>
@@ -81,7 +71,6 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         </button>
       </div>
 
-{/* ======================= USER AREA ====================== */}
 
       <div className={styles.userArea}>
         {isAuthenticated ? (

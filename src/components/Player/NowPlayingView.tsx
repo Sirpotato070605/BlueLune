@@ -11,10 +11,11 @@ import {
 
 interface NowPlayingViewProps {
   onClose: () => void;
+  isMaximized: boolean;             
+  onToggleMaximize: () => void;     
 }
 
-const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose }) => {
-  const [isMaximized, setIsMaximized] = useState(false);
+const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose, isMaximized, onToggleMaximize }) => {
   const [sidebarWidth, setSidebarWidth] = useState(350); 
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -34,7 +35,6 @@ const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose }) => {
     (mouseMoveEvent: MouseEvent) => {
       if (isResizing) {
         const newWidth = window.innerWidth - mouseMoveEvent.clientX;
-        
         if (newWidth > MIN_WIDTH && newWidth < MAX_WIDTH) {
           setSidebarWidth(newWidth);
         }
@@ -51,7 +51,6 @@ const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose }) => {
       window.removeEventListener("mouseup", stopResizing);
     };
   }, [resize, stopResizing]);
-
 
   const nextTrack = { title: "Chỉ Một Mình Anh", artist: "Nam Trương" };
 
@@ -77,7 +76,7 @@ const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose }) => {
 
         <button 
           className={styles.iconBtn} 
-          onClick={() => setIsMaximized(!isMaximized)}
+          onClick={onToggleMaximize} 
           title={isMaximized ? "Thu nhỏ" : "Phóng to"}
         >
           <IoResize size={18} />
@@ -126,24 +125,7 @@ const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose }) => {
               <span className={styles.queueArtist}>{nextTrack.artist}</span>
             </div>
           </div>
-          
-          <div className={styles.queueItem}>
-            <div className={styles.queueIcon}>🎵</div>
-            <div className={styles.queueInfo}>
-              <span className={styles.queueTitle}>Gió</span>
-              <span className={styles.queueArtist}>Jank</span>
-            </div>
-          </div>
-
-          <div className={styles.queueItem}>
-            <div className={styles.queueIcon}>🎵</div>
-            <div className={styles.queueInfo}>
-              <span className={styles.queueTitle}>Sóng gió</span>
-              <span className={styles.queueArtist}>Jack</span>
-            </div>
-          </div>
-
-
+        
         </div>
 
       </div>

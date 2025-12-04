@@ -12,16 +12,12 @@ const getGreeting = () => {
 const Home: React.FC = () => {
   const greeting = useMemo(() => getGreeting(), []);
 
-  // Giả lập danh sách "Gần đây" từ TRACKS (Lấy 6 bài đầu)
   const recentPlayed = TRACKS.slice(0, 6);
 
   return (
     <div className={styles.homeContainer}>
       
-      {/* 1. Lời chào */}
       <h1 className={styles.greeting}>{greeting}</h1>
-
-      {/* 2. Grid Gần đây - Dạng thẻ chữ nhật ngang */}
       <div className={styles.recentGrid}>
         {recentPlayed.map((track) => (
           <div key={`recent-${track.id}`} className={styles.recentCard}>
@@ -35,7 +31,6 @@ const Home: React.FC = () => {
         ))}
       </div>
 
-      {/* 3. Section: Tuyển tập hàng đầu - Dạng thẻ vuông lớn */}
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Tuyển tập hàng đầu của bạn</h2>
@@ -61,7 +56,6 @@ const Home: React.FC = () => {
         </div>
       </div>
 
-       {/* 4. Section: Gợi ý cho hôm nay (Reuse Albums để demo) */}
        <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Gợi ý cho hôm nay</h2>

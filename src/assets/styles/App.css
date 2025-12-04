@@ -1,5 +1,3 @@
-/* src/assets/styles/App.css */
-
 .app-container {
   display: flex;
   flex-direction: column;
@@ -13,32 +11,31 @@
 .main-body {
   display: flex;
   flex: 1;
-  margin-top: 60px; 
-  margin-bottom: 90px;
+  margin-top: 50px; 
+  margin-bottom: 90px; 
   overflow: hidden;
   width: 100%;
-  gap: 8px; /* Khoảng cách giữa 3 cột */
-  padding-right: 8px; /* Padding bên phải để cân đối */
+  gap: 8px;
+  padding-right: 8px;
+  position: relative; 
 }
 
-/* Style riêng cho phần giữa (Main Page) */
 .main-page-wrapper {
-  flex: 1; /* Chiếm phần còn lại */
+  flex: 1;
   min-width: 0; 
-  background: #121212; /* Màu nền xám đậm */
-  border-radius: 8px;  /* Bo góc */
+  background: #121212;
+  border-radius: 8px;
   overflow-y: auto;
   position: relative;
-  
-  /* Gradient nền */
   background: linear-gradient(to bottom, #202020 0%, #121212 40%);
 }
 
-/* Tùy chỉnh thanh cuộn cho phần giữa */
-.main-page-wrapper::-webkit-scrollbar {
-  width: 8px;
+
+.main-page-wrapper::-webkit-scrollbar { 
+  width: 8px; 
 }
-.main-page-wrapper::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
+
+.main-page-wrapper::-webkit-scrollbar-thumb { 
+  background-color: rgba(255, 255, 255, 0.3); 
+  border-radius: 4px; 
 }

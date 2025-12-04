@@ -1,7 +1,6 @@
-// src/components/Layout/YourLibrary.tsx
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styles from '../../assets/styles/YourLibrary.module.css';
-import { IoLibrary, IoGridOutline } from "react-icons/io5";
+import { IoLibrary} from "react-icons/io5";
 import { ALBUMS } from '../../data/mockData';
 
 interface YourLibraryProps {
@@ -10,7 +9,6 @@ interface YourLibraryProps {
 }
 
 const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
-  // State quản lý chiều rộng, mặc định 280px
   const [width, setWidth] = useState(280);
   const [isResizing, setIsResizing] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -21,10 +19,8 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
   const resize = useCallback(
     (mouseMoveEvent: MouseEvent) => {
       if (isResizing) {
-        // Tính toán width mới dựa trên vị trí chuột
-        // Vì Library bên trái, width = vị trí X của chuột
         const newWidth = mouseMoveEvent.clientX; 
-        if (newWidth > 72 && newWidth < 450) { // Giới hạn min/max
+        if (newWidth > 72 && newWidth < 450) { 
           setWidth(newWidth);
         }
       }
@@ -45,7 +41,6 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
     <aside 
       ref={sidebarRef}
       className={`${styles.libraryContainer} ${isCollapsed ? styles.collapsed : ''} ${isResizing ? styles.resizing : ''}`}
-      // Nếu không bị thu gọn thì dùng width custom, ngược lại dùng width mặc định của class collapsed
       style={!isCollapsed ? { width: `${width}px` } : {}}
     >
       <div className={styles.libraryHeader}>
@@ -55,14 +50,9 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
           title={isCollapsed ? "Mở rộng" : "Thu gọn"}
         >
           <IoLibrary size={24} className={styles.icon} />
-          {!isCollapsed && <span className={styles.text}>Thư viện</span>}
+          {!isCollapsed && <span className={styles.text}>Your Library</span>}
         </div>
         
-        {!isCollapsed && (
-             <div className={styles.headerActions}>
-                <IoGridOutline size={18} />
-             </div>
-        )}
       </div>
 
       {!isCollapsed && (
@@ -76,7 +66,7 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
         {ALBUMS.map((album) => (
           <div key={album.id} className={styles.libraryItem}>
             <img 
-              src={album.coverUrl || 'https://via.placeholder.com/50'} 
+              src={album.coverUrl} 
               alt={album.title} 
               className={styles.itemImg} 
             />
@@ -90,7 +80,6 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
         ))}
       </div>
 
-      {/* Thanh kéo thay đổi kích thước (chỉ hiện khi chưa thu gọn) */}
       {!isCollapsed && (
         <div className={styles.resizer} onMouseDown={startResizing}></div>
       )}
