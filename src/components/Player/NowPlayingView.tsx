@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styles from '../../assets/styles/NowPlayingView.module.css';
-import coverArt from '../../../public/images/DuoiNhungConMua.jpg';
+import coverArt from '../../../public/imagesSong/DuoiNhungConMua.jpg';
 
 import { 
   IoClose, 

@@ -12,8 +12,8 @@ export const CURRENT_USER: User = {
 export const TRACKS: Track[] = [
   {
     id: 't001',
-    title: 'Chỉ Một Mình Anh',
-    artist: 'Nam Trương',
+    title: 'Ngày Em Đẹp Nhất',
+    artist: 'Tama',
     audioUrl: 'LINK_AUDIO_CUA_BAN_O_DAY', 
     coverArtUrl: './imagesSong/chimotminhanh.jpg',
     duration: 293,
@@ -23,7 +23,7 @@ export const TRACKS: Track[] = [
     title: 'Dưới Những Cơn Mưa',
     artist: 'Mr. Siro',
     audioUrl: 'LINK_AUDIO_CUA_BAN_O_DAY',
-    coverArtUrl: 'LINK_ANH_BIA_O_DAY',
+    coverArtUrl: './imagesSong/DuoiNhungConMua.jpg',
     duration: 185,
   },
   {
@@ -31,23 +31,23 @@ export const TRACKS: Track[] = [
     title: 'Gió',
     artist: 'Jank',
     audioUrl: 'LINK_AUDIO_CUA_BAN_O_DAY',
-    coverArtUrl: 'LINK_ANH_BIA_O_DAY',
+    coverArtUrl: './imagesSong/Gio.jpg',
     duration: 240,
   },
   {
     id: 't004',
-    title: 'Making My Way',
-    artist: 'Sơn Tùng M-TP',
+    title: 'yêu Đơn Phương Là Gì',
+    artist: 'Nam Trương',
     audioUrl: 'LINK_AUDIO_CUA_BAN_O_DAY',
-    coverArtUrl: 'LINK_ANH_BIA_O_DAY',
+    coverArtUrl: './imagesSong/YeuDonPhuongLaGi.jpg',
     duration: 210,
   },
   {
     id: 't005',
-    title: 'Nấu ăn cho em',
-    artist: 'Đen Vâu',
+    title: 'Phố Cũ Còn Anh',
+    artist: 'Quinn',
     audioUrl: 'LINK_AUDIO_CUA_BAN_O_DAY',
-    coverArtUrl: 'LINK_ANH_BIA_O_DAY',
+    coverArtUrl: './imagesSong/PhoCuConAnh.jpg',
     duration: 250,
   }
 ];
@@ -56,30 +56,30 @@ export const TRACKS: Track[] = [
 export const ALBUMS: Album[] = [
   {
     id: 'al001',
-    title: 'Tuyển Tập Nhạc Buồn',
+    title: 'Nhạc Nhòa',
     description: 'Mr. Siro, Chillies và nhiều hơn nữa',
-    coverUrl: 'LINK_ANH_ALBUM_O_DAY', 
+    coverUrl: '/public/imgAlbum/NhacNhoa.jpg', 
     trackIds: ['t001', 't002']
   },
   {
     id: 'al002',
-    title: 'Rap Việt Hay Nhất',
+    title: 'Suy Tình',
     description: 'Đen Vâu, Binz, Karik',
-    coverUrl: 'LINK_ANH_ALBUM_O_DAY',
+    coverUrl: './public/imgAlbum/SuyTinh.jpg',
     trackIds: ['t005']
   },
   {
     id: 'al003',
     title: 'V-Pop Thịnh Hành',
     description: 'Cập nhật những bài hát mới nhất',
-    coverUrl: 'LINK_ANH_ALBUM_O_DAY',
+    coverUrl: './public/imgAlbum/VPop.jpg',
     trackIds: ['t003', 't004']
   },
   {
     id: 'al004',
     title: 'Nhạc Lofi Chill',
     description: 'Học tập và làm việc hiệu quả',
-    coverUrl: 'LINK_ANH_ALBUM_O_DAY',
+    coverUrl: './public/imgAlbum/LofiChill.jpg',
     trackIds: ['t001']
   }
 ];

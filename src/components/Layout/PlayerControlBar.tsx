@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 import styles from '../../assets/styles/PlayerControlBar.module.css';
-import coverArt from '../../../public/images/DuoiNhungConMua.jpg';
+import coverArt from './../../../public/imagesSong/DuoiNhungConMua.jpg';
 
 import { 
   IoPlay, 

@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import styles from '../../assets/styles/Home.module.css';
-import { ALBUMS, TRACKS } from '../../../public/data/mockData';
+import { ALBUMS, TRACKS } from '../../data/mockData';
+
 
 const getGreeting = () => {
   const hour = new Date().getHours();
-  if (hour < 12) return 'Chào buổi sáng';
-  if (hour < 18) return 'Chào buổi chiều';
-  return 'Chào buổi tối';
+  if (hour < 12) return 'Good Morning';
+  if (hour < 18) return 'The best Afternoon';
+  return 'Good Evening';
 };
 
 const Home: React.FC = () => {

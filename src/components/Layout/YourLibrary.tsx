@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import styles from '../../assets/styles/YourLibrary.module.css';
 import { IoLibrary} from "react-icons/io5";
-import { ALBUMS } from '../../../public/data/mockData';
+import { ALBUMS } from '../../data/mockData';
 
 interface YourLibraryProps {
   isCollapsed: boolean;
