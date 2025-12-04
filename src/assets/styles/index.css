@@ -13,11 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- THÊM ĐOẠN NÀY --- */
 html, body, #root {
-  height: 100%; /* Bắt buộc chiều cao bằng màn hình */
+  height: 100%; 
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Khóa thanh cuộn của trình duyệt */
+  overflow: hidden; 
 }

@@ -13,3 +13,11 @@ export interface User {
   avatarUrl: string;
   isAuthenticated: boolean;
 }
+
+export interface Album {
+  id: string;
+  title: string;
+  description: string;
+  coverUrl: string;
+  trackIds: string[]; // Danh sách ID các bài hát trong album
+}

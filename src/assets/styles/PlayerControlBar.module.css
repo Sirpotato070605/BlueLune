@@ -18,14 +18,14 @@
     position: relative;
 }
 
-/* === LEFT SECTION === */
+
 .leftControls {
     display: flex;
     align-items: center;
     gap: 10px;
     position: absolute; 
     left: 20px;
-    max-width: 25%; /* Giới hạn chiều rộng để không đè vào giữa */
+    max-width: 25%; 
 }
 
 .coverArt {
@@ -40,7 +40,7 @@
 .songInfo {
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Ẩn text nếu quá dài */
+    overflow: hidden; 
 }
 
 .songName {
@@ -60,7 +60,6 @@
     text-overflow: ellipsis;
 }
 
-/* === CENTER SECTION === */
 .centerSection {
     position: absolute;
     left: 50%;
@@ -76,11 +75,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 15px; /* Giảm gap chút để gọn hơn */
+    gap: 15px; 
     margin-bottom: 5px; 
 }
 
-/* === Progress Bar === */
+
 .centerBottomProgress {
     display: flex;
     align-items: center;
@@ -99,13 +98,13 @@
 .progressBar {
     flex: 1; 
     height: 4px;
-    background: #4d4d4d; /* Nền xám tối */
+    background: #4d4d4d; 
     cursor: pointer;
     border-radius: 4px;
     position: relative;
 }
 
-/*Trắng hơi xanh dương (#def6ff) */
+
 .progress {
     height: 100%;
     background: #def6ff; 
@@ -121,7 +120,7 @@
     transform: translateY(-50%);
     width: 12px;
     height: 12px;
-    background: #ffffff; /* Knob màu trắng sáng */
+    background: #ffffff; 
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(222, 246, 255, 0.5);
     opacity: 0; 
@@ -132,17 +131,17 @@
     opacity: 1; 
 }
 
-/* === RIGHT SECTION === */
+
 .rightControls {
     display: flex;
     align-items: center;
-    gap: 8px; /* Giảm gap để chứa đủ các nút mới */
+    gap: 8px; 
     position: absolute;
     right: 20px;
     height: 100%;
 }
 
-/* === Volume Area === */
+
 .volumeWrapper {
     display: flex;
     align-items: center;
@@ -152,7 +151,7 @@
 .volumeBarContainer {
     display: flex;
     align-items: center;
-    width: 80px; /* Thu nhỏ thanh volume một chút cho responsive */
+    width: 80px; 
 }
 
 .volumeBar {
@@ -169,7 +168,7 @@
     top: 0;
     left: 0;
     height: 100%;
-    background: #def6ff; /* Màu mới */
+    background: #def6ff; 
     border-radius: 4px;
     z-index: 1;
 }
@@ -192,11 +191,11 @@
     opacity: 1;
 }
 
-/* === BUTTON STYLES === */
+
 .controlButton {
     background: transparent;
     border: none;
-    color: #b3b3b3; /* Màu mặc định xám nhạt */
+    color: #b3b3b3;
     cursor: pointer;
     padding: 6px;
     border-radius: 50%;
@@ -211,9 +210,9 @@
     transform: scale(1.1);
 }
 
-/* === Active State (Cho Repeat, Shuffle) === */
+
 .activeControl {
-    color: #def6ff !important; /* Màu sáng khi active */
+    color: #def6ff !important; 
     text-shadow: 0 0 8px rgba(222, 246, 255, 0.4);
 }
 
@@ -233,10 +232,9 @@
 
 .playButton:hover {
     transform: scale(1.05);
-    background: #def6ff; /* Hover nút play cũng đổi màu nhẹ */
+    background: #def6ff;
 }
 
-/* Animation quay đĩa */
 .spinningCover {
     animation: spin-slow 10s linear infinite;
 }

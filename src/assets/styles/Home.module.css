@@ -1,0 +1,148 @@
+/* src/assets/styles/Home.module.css */
+
+.homeContainer {
+  /* Padding bottom để không bị PlayerBar che mất nội dung cuối cùng */
+  padding-bottom: 40px; 
+  color: white;
+  width: 100%;
+}
+
+.greeting {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* --- Section 1: Gần đây (Dạng thẻ chữ nhật nhỏ) --- */
+.recentGrid {
+  display: grid;
+  /* Tự động chia cột, mỗi cột tối thiểu 270px, tối đa 1fr */
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); 
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.recentCard {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.recentCard:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.recentImg {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  flex-shrink: 0; /* Đảm bảo ảnh không bị co lại */
+  box-shadow: 4px 0 8px rgba(0,0,0,0.3);
+}
+
+.recentTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0 16px;
+  color: white;
+  
+  /* Cắt chữ nếu quá dài */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* --- Section 2: Danh sách Album (Dạng thẻ vuông lớn) --- */
+.section {
+  margin-bottom: 40px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sectionTitle:hover { text-decoration: underline; }
+
+.showAll {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #b3b3b3;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.showAll:hover { text-decoration: underline; }
+
+/* Grid cho Album: Tự động co giãn số lượng cột */
+.albumGrid {
+  display: grid;
+  /* Mỗi thẻ album tối thiểu 180px */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+  gap: 24px;
+}
+
+/* Card Album */
+.albumCard {
+  background-color: #181818;
+  padding: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.albumCard:hover {
+  background-color: #282828;
+}
+
+.albumImageWrapper {
+  width: 100%;
+  aspect-ratio: 1/1; /* Luôn vuông */
+  margin-bottom: 16px;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.albumImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.albumInfo {
+  min-height: 60px; /* Giữ chiều cao đều nhau cho phần text */
+}
+
+.albumTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+.albumDesc {
+  font-size: 0.85rem;
+  color: #a7a7a7;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Giới hạn 2 dòng */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
