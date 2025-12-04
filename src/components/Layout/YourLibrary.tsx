@@ -46,7 +46,7 @@ const YourLibrary: React.FC<YourLibraryProps> = ({ isCollapsed, onToggle }) => {
       <div className={styles.libraryHeader}>
         <div 
           className={styles.headerTitle} 
-          onClick={onToggle} 
+          onClick={onToggle}  
           title={isCollapsed ? "Mở rộng" : "Thu gọn"}
         >
           <LuLibraryBig size={24} className={styles.icon} />

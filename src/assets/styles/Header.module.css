@@ -23,11 +23,12 @@
   padding: 5px 10px;
   border-radius: 8px;
   color: white;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .logo:hover {
-  opacity: 0.8;
+  opacity: 1;
+  color: #29c5e6; 
 }
 
 
@@ -43,11 +44,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  transition: all 0.2s ease-in-out;
+  color: #b3b3b3;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   margin: 0 5px;
 }
 
+.homeButton:hover, 
+.albumButton:hover, 
+.bellButton:hover {
+  background-color: #333333;
+  color: #29c5e6; /* Màu Teal */
+  transform: scale(1.15); /* Phóng to nhẹ */
+  box-shadow: 0 0 10px rgba(41, 197, 230, 0.2); /* Đổ bóng nhẹ màu teal */
+}
 
 .homeButtonArea { 
   margin-left: 20px; 

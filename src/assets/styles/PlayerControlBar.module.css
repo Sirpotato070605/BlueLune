@@ -198,23 +198,37 @@
     border: none;
     color: #b3b3b3;
     cursor: pointer;
-    padding: 6px;
+
+    width: 36px; 
+    height: 36px;
+    padding: 0;
+
     border-radius: 50%;
-    transition: all 0.2s ease;
+
     display: flex;
     align-items: center;
     justify-content: center;
+    
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    
+    transform-origin: center center;
+    
+    -webkit-font-smoothing: antialiased;
+    backface-visibility: hidden;
 }
 
 .controlButton:hover {
-    color: white;
-    transform: scale(1.1);
+    color: #29c5e6;
+    background-color: rgba(41, 197, 230, 0.1);
+    transform: scale(1.15);
+    text-shadow: 0 0 5px rgba(41, 197, 230, 0.15);
 }
 
 
 .activeControl {
-    color: #def6ff !important; 
-    text-shadow: 0 0 8px rgba(222, 246, 255, 0.4);
+    color: #29c5e6 !important; 
+    text-shadow: 0 0 8px rgba(41, 197, 230, 0.6);
+    position: relative;
 }
 
 .playButton {
@@ -228,12 +242,14 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .playButton:hover {
-    transform: scale(1.05);
-    background: #def6ff;
+    transform: scale(1.1);
+    background: #29c5e6;
+    color: white;
+    box-shadow: 0 0 15px rgba(41, 197, 230, 0.5);
 }
 
 .spinningCover {
@@ -243,4 +259,25 @@
 @keyframes spin-slow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
+}
+
+
+.activeControl::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 4px;
+    height: 4px;
+    background-color: #29c5e6;
+    border-radius: 50%;
+}
+
+.progressBar:hover .progress,
+.volumeBarContainer:hover .volumeTrack {
+    background: #29c5e6;
+}
+
+.progress::after,
+.volumeKnob {
+    background: #ffffff; 
 }
