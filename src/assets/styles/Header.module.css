@@ -1,4 +1,3 @@
-/* ==================== HEADER LAYOUT ==================== */
 .header {
   display: flex;
   align-items: center;
@@ -14,7 +13,6 @@
   z-index: 1000;
 }
 
-/* ==================== LOGO (Giữ nguyên) ==================== */
 .logo {
   font-size: 1.8em;
   font-weight: bold;
@@ -30,7 +28,6 @@
   opacity: 0.8;
 }
 
-/* ==================== COMMON ICON BUTTONS ==================== */
 
 .homeButton, 
 .albumButton, 
@@ -49,7 +46,6 @@
   margin: 0 5px;
 }
 
-/* Kích thước Icon bên trong */
 .homeButton svg, 
 .albumButton svg, 
 .bellButton svg {
@@ -58,7 +54,6 @@
   display: block;
 }
 
-/* --- HIỆU ỨNG HOVER MỚI --- */
 .homeButton:hover, 
 .albumButton:hover, 
 .bellButton:hover {
@@ -68,7 +63,6 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
 }
 
-/* Layout spacing */
 .homeButtonArea {
   margin-left: 20px;
   margin-right: 15px;
@@ -80,7 +74,6 @@
   margin-left: 15px;
 }
 
-/* ==================== SEARCH BAR ==================== */
 .searchArea { 
   display: flex;
   align-items: center;
@@ -90,7 +83,7 @@
   border-radius: 20px;
   background: #1f1f1f; 
   color: white;
-  border: 1px solid transparent; /* Giữ chỗ cho border để không bị nhảy layout */
+  border: 1px solid transparent; 
   transition: all 0.2s ease-in-out;
 }
 
@@ -120,7 +113,6 @@
   transition: color 0.2s ease;
 }
 
-/* --- Hiệu ứng Hover cho Search Bar --- */
 .searchArea:hover,
 .searchArea:focus-within {
   transform: scale(1.02); 
@@ -137,7 +129,6 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* ==================== USER AREA ==================== */
 .userArea {
   margin-left: 20px;
   margin-right: 10px;
@@ -151,7 +142,7 @@
   gap: 10px;
 }
 
-/* --- User Profile --- */
+
 .userProfile {
   display: flex;
   align-items: center;
@@ -175,14 +166,14 @@
   color: white;
 }
 
-/* --- Hiệu ứng Hover cho User Profile --- */
+
 .userProfile:hover {
-  background-color: #333333; /* Nền xám nhẹ khi hover */
+  background-color: #333333; 
   transform: scale(1.02);
 }
 
 
-/* Animation xoay avatar */
+
 .avatar.spin {
   animation: spin-slow 30s linear infinite;
 }
@@ -192,7 +183,7 @@
   to   { transform: rotate(360deg); }
 }
 
-/* ==================== AUTH BUTTONS (Login/Signup) ==================== */
+
 .authButtons {
   display: flex;
   align-items: center;
@@ -211,7 +202,7 @@
   transition: all 0.2s ease;
 }
 
-/* Hiệu ứng hover cho nút Auth */
+
 .authButtons button:hover {
   transform: scale(1.05);
   filter: brightness(0.9); 
@@ -222,7 +213,7 @@
   transform: scale(0.95);
 }
 
-/* ==================== DROPDOWN MENU ==================== */
+
 .dropdownMenu {
   position: absolute;
   top: 120%;
