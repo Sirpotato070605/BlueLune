@@ -157,6 +157,30 @@ const NowPlayingView: React.FC<NowPlayingViewProps> = ({ onClose }) => {
             </div>
           </div>
 
+          <div className={styles.queueItem}>
+            <div className={styles.queueIcon}>🎵</div>
+            <div className={styles.queueInfo}>
+              <span className={styles.queueTitle}>Sóng gió</span>
+              <span className={styles.queueArtist}>Jack</span>
+            </div>
+          </div>
+
+          <div className={styles.queueItem}>
+            <div className={styles.queueIcon}>🎵</div>
+            <div className={styles.queueInfo}>
+              <span className={styles.queueTitle}>Sóng gió</span>
+              <span className={styles.queueArtist}>Jack</span>
+            </div>
+          </div>
+
+          <div className={styles.queueItem}>
+            <div className={styles.queueIcon}>🎵</div>
+            <div className={styles.queueInfo}>
+              <span className={styles.queueTitle}>Sóng gió</span>
+              <span className={styles.queueArtist}>Jack</span>
+            </div>
+          </div>
+
         </div>
 
       </div>
