@@ -24,7 +24,7 @@
   flex: 1;
   min-width: 0; 
   background: #121212;
-  border-radius: 8px;
+
   overflow-y: auto;
   position: relative;
   background: linear-gradient(to bottom, #202020 0%, #121212 40%);
@@ -33,6 +33,7 @@
 
 .main-page-wrapper::-webkit-scrollbar { 
   width: 8px; 
+  height: 6px;
 }
 
 .main-page-wrapper::-webkit-scrollbar-thumb { 

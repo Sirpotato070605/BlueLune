@@ -55,7 +55,7 @@ export const TRACKS: Track[] = [
   }
 ];
 
-// 3. Dữ liệu Album / Playlist
+
 export const ALBUMS: Album[] = [
   {
     id: 'al001',
