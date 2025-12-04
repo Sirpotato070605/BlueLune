@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import styles from '../../assets/styles/Home.module.css';
-import { ALBUMS, TRACKS } from '../../data/mockData';
+import { ALBUMS, TRACKS } from '../../../public/data/mockData';
 
 const getGreeting = () => {
   const hour = new Date().getHours();

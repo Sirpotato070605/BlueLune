@@ -1,7 +1,6 @@
-// src/data/mockData.ts
-import type { User, Track, Album } from '../types';
+import type { User, Track, Album } from '../../src/types';
 
-// 1. Dữ liệu User
+
 export const CURRENT_USER: User = {
   id: 'u001',
   name: 'Nam Trương',
@@ -9,16 +8,14 @@ export const CURRENT_USER: User = {
   isAuthenticated: true,
 };
 
-// 2. Dữ liệu Bài hát (Tracks)
+
 export const TRACKS: Track[] = [
   {
     id: 't001',
     title: 'Chỉ Một Mình Anh',
     artist: 'Nam Trương',
-    // LINK_AUDIO: Điền link file mp3 vào đây
     audioUrl: 'LINK_AUDIO_CUA_BAN_O_DAY', 
-    // LINK_IMAGE: Điền link ảnh bìa bài hát
-    coverArtUrl: 'LINK_ANH_BIA_O_DAY',
+    coverArtUrl: './imagesSong/chimotminhanh.jpg',
     duration: 293,
   },
   {
@@ -61,7 +58,6 @@ export const ALBUMS: Album[] = [
     id: 'al001',
     title: 'Tuyển Tập Nhạc Buồn',
     description: 'Mr. Siro, Chillies và nhiều hơn nữa',
-    // LINK_IMAGE_ALBUM
     coverUrl: 'LINK_ANH_ALBUM_O_DAY', 
     trackIds: ['t001', 't002']
   },
@@ -88,7 +84,6 @@ export const ALBUMS: Album[] = [
   }
 ];
 
-// Helper function để lấy bài hát theo ID
 export const getTracksByAlbum = (albumId: string): Track[] => {
   const album = ALBUMS.find(a => a.id === albumId);
   if (!album) return [];
