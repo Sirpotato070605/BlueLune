@@ -80,7 +80,7 @@
     margin-bottom: 5px; 
 }
 
-/* --- Progress Bar --- */
+/* === Progress Bar === */
 .centerBottomProgress {
     display: flex;
     align-items: center;
@@ -142,7 +142,7 @@
     height: 100%;
 }
 
-/* --- Volume Area --- */
+/* === Volume Area === */
 .volumeWrapper {
     display: flex;
     align-items: center;
@@ -211,7 +211,7 @@
     transform: scale(1.1);
 }
 
-/* --- Active State (Cho Repeat, Shuffle) --- */
+/* === Active State (Cho Repeat, Shuffle) === */
 .activeControl {
     color: #def6ff !important; /* Màu sáng khi active */
     text-shadow: 0 0 8px rgba(222, 246, 255, 0.4);

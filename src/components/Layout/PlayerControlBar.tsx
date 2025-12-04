@@ -24,8 +24,8 @@ const DURATION_SECONDS = 300;
 
 // 1. Thêm Interface định nghĩa Props
 interface PlayerControlBarProps {
-  onToggleSidebar: () => void; // Hàm để đóng mở sidebar
-  isSidebarOpen: boolean;      // Trạng thái để đổi màu nút
+  onToggleSidebar: () => void; 
+  isSidebarOpen: boolean;      
 }
 
 // 2. Nhận props vào component

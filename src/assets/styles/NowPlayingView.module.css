@@ -1,46 +1,89 @@
+/* ==================== CONTAINER MẶC ĐỊNH (SIDEBAR) ==================== */
 .container {
-  /* Layout & Positioning */
   display: flex;
   flex-direction: column;
   background-color: #121212;
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   
-  height: 100%; 
+  height: calc(100% - 10px); 
   
-  /* Yêu cầu kích thước */
-  width: 25%;
-  min-width: 16.66vw;
-  max-width: 25vw;
+  /* Chiều rộng sẽ được set inline từ JS, bỏ width cố định ở đây */
+  min-width: 280px;
+  /* max-width xóa đi để cho phép kéo rộng hơn nếu muốn, JS đã chặn rồi */
   
-  /* Cách Header 10px */
   margin-top: 10px;
   border-top-left-radius: 12px;
   
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-  
-  overflow: hidden;  /* Ngăn cuộn bên ngoài */
-
+  /* Transition cho width nên tắt khi đang kéo resize để tránh giật */
+  transition: width 0s, margin 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden; 
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+  z-index: 90;
+  position: relative; /* Để đặt resizer tuyệt đối */
 }
 
-/* Trạng thái phóng to */
-.maximized {
-  width: 100% !important;
-  max-width: 100% !important;
-  border-left: none;
+/* Khi đang resize thì tắt select text */
+.resizing {
+  user-select: none;
+  border-left-color: #def6ff; /* Sáng viền lên khi kéo */
+}
+
+/* --- THANH KÉO (RESIZER) --- */
+.resizer {
+  width: 10px; /* Vùng bấm chuột rộng 10px */
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0; /* Nằm sát mép trái */
+  cursor: ew-resize; /* Con trỏ chuột mũi tên 2 chiều */
   z-index: 10;
-  border-top-left-radius: 0;
-  margin-top: 0; /* Khi phóng to thì bỏ margin để full màn hình đẹp hơn */
-  height: 100%;  /* Full chiều cao khi phóng to */
+  background: transparent;
+}
+
+.resizer:hover {
+  background: rgba(255, 255, 255, 0.1); /* Hiện màu nhẹ khi hover vào mép */
+}
+
+/* ==================== TRẠNG THÁI MAXIMIZED ==================== */
+.maximized {
+  position: absolute; 
+  top: 0;
+  right: 0;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border-radius: 0;
+  border: none;
+  z-index: 100;
+  
+  /* Hiệu ứng ánh sáng xanh */
+  background: radial-gradient(
+    circle at 50% 40%, 
+    rgba(29, 185, 255, 0.15) 0%,   
+    rgba(29, 185, 255, 0.02) 50%, 
+    #121212 90%                    
+  );
 }
 
 /* --- Header Controls --- */
 .headerControl {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Đảm bảo nút nằm 2 bên */
   align-items: center;
-  padding: 15px 20px; /* Tăng padding chút cho thoáng */
-  flex-shrink: 0; /* Ngăn header bị co lại khi nội dung dài */
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 15px 20px;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Khi phóng to */
+.maximized .headerControl {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  /* GIỮ NGUYÊN justify-content: space-between ĐỂ NÚT KHÔNG BỊ DỒN */
+  padding: 20px 30px;
 }
 
 .iconBtn {
@@ -54,46 +97,55 @@
   align-items: center;
   justify-content: center;
   transition: all 0.2s;
+  background-color: rgba(0,0,0,0.2); 
 }
 
 .iconBtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.2);
   color: white;
   transform: scale(1.1);
 }
 
-/* --- QUAN TRỌNG: Scrollable Content --- */
-/* Phần này sẽ cuộn độc lập bên trong khung cố định */
+/* --- Scroll Content --- */
 .scrollContent {
-  flex: 1; /* Chiếm toàn bộ không gian còn lại bên dưới header */
-  overflow-y: auto; /* Chỉ hiện thanh cuộn dọc cho phần này */
+  flex: 1;
+  overflow-y: auto;
   overflow-x: hidden;
   padding: 0 20px 20px 20px;
-  
-  /* Tùy chỉnh thanh cuộn cho đẹp */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Style cho thanh cuộn trên Webkit (Chrome/Edge/Safari) */
-.scrollContent::-webkit-scrollbar {
-  width: 6px;
+.maximized .scrollContent {
+  padding-top: 80px; 
+  align-items: center;
+  width: 100%;
+  max-width: none;
+  margin: 0 ;
 }
 
-.scrollContent::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+/* Scrollbar Styles */
+.scrollContent::-webkit-scrollbar { 
+  width: 6px; 
 }
 
-.scrollContent::-webkit-scrollbar-track {
-  background: transparent;
+.scrollContent::-webkit-scrollbar-thumb { 
+  background-color: rgba(255, 255, 255, 0.2); 
+  border-radius: 3px; 
 }
 
-/* --- Các phần còn lại giữ nguyên như cũ --- */
+.scrollContent::-webkit-scrollbar-track { 
+  background: transparent; 
+}
+
+
+
+
 .coverSection {
   margin: 20px 0;
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 .largeCover {
@@ -104,149 +156,194 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
+.maximized .coverSection {
+  width: 100%;
+  max-width: 1000px;
+  height: 35vh; 
+  min-height: 250px;
+  max-height: 400px;
+  margin-bottom: 30px;
+}
+
+.maximized .largeCover {
+  width: auto;
+  height: 100%; 
+  box-shadow: 0 0 50px rgba(29, 185, 255, 0.15); 
+}
+
 .trackHeader {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 20px;
+  width: 100%;
 }
 
-.trackInfoMain {
-  flex: 1;
-  margin-right: 15px;
-}
-
-.songTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin: 0 0 5px 0;
-  color: white;
-  word-break: break-word;
-  line-height: 1.2;
-}
-
-.artistName {
-  font-size: 1rem;
-  color: #b3b3b3;
-  margin: 0;
-}
-
-.actions {
-  display: flex;
-  gap: 15px;
-  padding-top: 5px;
-}
-
-.actionBtn {
-  background: transparent;
-  border: none;
-  color: #b3b3b3;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-}
-
-.actionBtn:hover {
-  color: #def6ff;
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 5px rgba(222, 246, 255, 0.3));
-}
-
-.creditSection {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 12px;
-  margin-bottom: 20px;
-}
-
-.creditSection h3 {
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #888;
-  margin: 0 0 10px 0;
-}
-
-.creditSection p {
-  font-size: 0.9rem;
-  color: #ddd;
-  margin: 5px 0;
-}
-
-.queueSection {
-  /* background-color: rgba(255, 255, 255, 0.02); */
-  padding-top: 10px;
-}
-
-.queueHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.queueHeader h3 {
-  font-size: 1rem;
-  font-weight: bold;
-  margin: 0;
-  color: white;
-}
-
-.seeAll {
-  font-size: 0.8rem;
-  color: #b3b3b3;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.seeAll:hover {
-  color: white;
-  text-decoration: underline;
-}
-
-.queueItem {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  border-radius: 8px;
-  transition: background 0.2s;
-  cursor: pointer;
-  margin-bottom: 5px;
-}
-
-.queueItem:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.queueIcon {
-  width: 40px;
-  height: 40px;
-  background: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 6px;
-  margin-right: 12px;
-  font-size: 1rem;
-  color: #888;
-}
-
-.queueInfo {
-  display: flex;
+.maximized .trackHeader {
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+  max-width: 1000px; 
+  width: 100%;
 }
 
-.queueTitle {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: white;
-  margin-bottom: 2px;
+.trackInfoMain { 
+  flex: 1; 
+  margin-right: 15px; 
 }
 
-.queueArtist {
-  font-size: 0.8rem;
-  color: #888;
+.maximized .trackInfoMain { 
+  margin-right: 0; 
+  margin-bottom: 15px; 
+}
+
+
+.songTitle { 
+  font-size: 1.5rem; 
+  font-weight: 700; 
+  margin: 0 0 5px 0; 
+  color: white; 
+  line-height: 1.2; 
+}
+
+.maximized .songTitle { 
+  font-size: 2.2rem; 
+  text-shadow: 0 0 10px rgba(29, 185, 255, 0.3);
+}
+
+.artistName { 
+  font-size: 1rem; 
+  color: #b3b3b3; 
+  margin: 0; 
+}
+
+.maximized .artistName { 
+  font-size: 1.2rem; 
+  color: #def6ff; 
+}
+
+.actions { 
+  display: flex; 
+  gap: 15px; 
+  padding-top: 5px; }
+
+.maximized .actions { 
+  transform: scale(1.2); 
+}
+
+
+.actionBtn { 
+  background: transparent; 
+  border: none; 
+  color: #b3b3b3; 
+  cursor: pointer; 
+  padding: 0; 
+  transition: all 0.2s; 
+}
+
+.actionBtn:hover { 
+  color: #def6ff; 
+  transform: scale(1.1); 
+}
+
+.creditSection { 
+  background-color: rgba(255, 255, 255, 0.05); 
+  padding: 15px; 
+  border-radius: 12px; 
+  margin-bottom: 20px; 
+  width: 100%; 
+}
+
+.maximized .creditSection { 
+  display: none; 
+}
+
+.creditSection h3 { 
+  font-size: 0.8rem; 
+  text-transform: uppercase; 
+  color: #888; 
+  margin: 0; 
+}
+
+.creditSection p { 
+  font-size: 0.9rem; 
+  color: #ddd; 
+  margin: 5px 0; 
+}
+
+.queueSection { 
+  padding-top: 10px; 
+  width: 100%; 
+}
+
+.maximized .queueSection { 
+  margin-top: auto; 
+  background: rgba(0, 0, 0, 0.3); 
+  padding: 20px; 
+  border-radius: 16px; 
+  border: 1px solid rgba(255, 255, 255, 0.05); 
+  width: 90%; 
+  max-width: 600px; 
+}
+
+.queueHeader { 
+  display: flex; 
+  justify-content: space-between; 
+  margin-bottom: 15px; 
+}
+
+.queueHeader h3 { 
+  font-size: 1rem; 
+  font-weight: bold; 
+  margin: 0; 
+  color: white; 
+}
+
+.seeAll { 
+  font-size: 0.8rem; 
+  color: #b3b3b3; 
+  cursor: pointer; 
+  font-weight: 600; 
+}
+
+.queueItem { 
+  display: flex; 
+  align-items: center; 
+  padding: 10px; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  margin-bottom: 5px; 
+}
+
+.queueItem:hover { 
+  background-color: rgba(255, 255, 255, 0.1); 
+}
+
+.queueIcon { 
+  width: 40px; 
+  height: 40px; 
+  background: #333; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  border-radius: 6px; 
+  margin-right: 12px; 
+}
+
+.queueInfo { 
+  display: flex; 
+  flex-direction: column; 
+}
+
+.queueTitle { 
+  font-size: 0.95rem; 
+  font-weight: 500; 
+  color: white; 
+}
+
+
+.queueArtist { 
+  font-size: 0.8rem; 
+  color: #888; 
 }
