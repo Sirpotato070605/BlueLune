@@ -1,4 +1,5 @@
 import React, {useState, useRef ,useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../../assets/styles/Header.module.css";
 import avatarImg from "../../../public/images/GaoXanh.jpg";
 
@@ -14,6 +15,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const user = { name: "Nam Trương", avatarUrl: avatarImg };
   const isAuthenticated = true; 
+  const navigate = useNavigate();
 
     const handleUserClick = () => {
     setShowDropdown(!showDropdown);
@@ -36,10 +38,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
     <header className={styles.header}>
 
 
-      <div className={styles.logo}>Teall</div>
+      <div className={styles.logo} onClick={() => navigate('/')}>Teall</div>
 
       <div className={styles.homeButtonArea}>
-        <button className={styles.homeButton}>
+        <button className={styles.homeButton} onClick={() => navigate('/')}>
           <GoHomeFill size={22} />
         </button>
       </div>

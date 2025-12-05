@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../assets/styles/Home.module.css';
 import { ALBUMS, TRACKS } from '../../data/mockData';
 
@@ -14,6 +15,11 @@ const Home: React.FC = () => {
   const greeting = useMemo(() => getGreeting(), []);
 
   const recentPlayed = TRACKS.slice(0, 6);
+  const navigate = useNavigate();
+
+  const handleAlbumClick = () => {
+    navigate('/playlist');
+  };
 
   return (
     <div className={styles.homeContainer}>
@@ -40,7 +46,7 @@ const Home: React.FC = () => {
 
         <div className={styles.albumGrid}>
           {ALBUMS.map((album) => (
-            <div key={album.id} className={styles.albumCard}>
+            <div key={album.id} className={styles.albumCard} onClick={handleAlbumClick}>
               <div className={styles.albumImageWrapper}>
                 <img 
                   src={album.coverUrl || 'https://via.placeholder.com/180'} 
