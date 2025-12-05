@@ -1,386 +1,351 @@
 .container {
-  display: flex;
-  flex-direction: column;
-  background-color: #121212;
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  height: 100%;
-  width: 100%;
-  min-width: 280px;
-  position: relative;
-  z-index: 90;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    background-color: #121212;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+    width: 100%;
+    min-width: 280px;
+    position: relative;
+    z-index: 90;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    box-shadow: -5px 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .maximized {
-  position: fixed;
-  top: 50px;
-  bottom: 90px;
-  left: 88px;
-  right: 0;
-  width: auto !important;
-  margin: 0 !important;
-  border-radius: 8px 0 0 8px;
-  border: none;
-  z-index: 100;
-  background: radial-gradient(
-    circle at 50% 30%,
-    rgba(29, 185, 255, 0.2) 0%,
-    #121212 70%
-  );
-  overflow-y: auto !important;
-  overflow-x: hidden;
-}
-
-@media (max-width: 768px) {
-  .maximized {
-    left: 0 !important;
-    width: 100vw !important;
-    z-index: 10000;
-  }
-}
-
-.headerControl {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  width: 100%;
-  height: 64px;
-  box-sizing: border-box;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 20;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
-}
-
-.maximized .headerControl {
-  max-width: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
-  backdrop-filter: blur(0px);
-}
-
-.container:not(.maximized) .headerControl {
-  position: sticky;
-  background-color: #121212;
-}
-
-.iconBtn {
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
-  color: #b3b3b3;
-  cursor: pointer;
-  padding: 8px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  backdrop-filter: blur(4px);
-}
-
-.iconBtn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: white;
-  transform: scale(1.1);
-}
-
-.scrollContent {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.container:not(.maximized) .scrollContent {
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding: 0 0 120px 0;
-}
-
-.maximized .scrollContent {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto 1fr;
-  column-gap: 40px;
-  row-gap: 30px;
-  align-items: start;
-  justify-content: center;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 80px 40px 120px 40px;
-  height: auto;
-  overflow: visible;
-}
-
-.scrollContent > * {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.container:not(.maximized) .scrollContent > * {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.container:not(.maximized) .scrollContent::-webkit-scrollbar {
-  width: 8px;
-}
-
-.container:not(.maximized) .scrollContent::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 4px;
-}
-
-.container:not(.maximized) .scrollContent::-webkit-scrollbar-track {
-  background: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    border: none;
+    z-index: 1000;
+    background: radial-gradient(circle at 50% 30%, rgba(29, 185, 255, 0.2) 0%, #121212 70%);
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .maximized::-webkit-scrollbar {
-  width: 12px;
+    width: 12px;
 }
 
 .maximized::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  border: 3px solid transparent;
-  background-clip: content-box;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    border: 3px solid transparent;
+    background-clip: content-box;
 }
 
 .maximized::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
-.coverSection {
-  margin: 10px 0 20px 0;
-  display: flex;
-  justify-content: center;
-  flex-shrink: 0;
+.headerControl {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    width: 100%;
+    height: 64px;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
 }
 
-.largeCover {
-  width: 100%;
-  aspect-ratio: 1/1;
-  border-radius: 8px;
-  object-fit: cover;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
+.maximized .headerControl {
+    background: linear-gradient(to bottom, rgba(18, 18, 18, 0.8) 0%, rgba(18, 18, 18, 0) 100%);
+    backdrop-filter: blur(0px);
 }
 
-.maximized .coverSection {
-  grid-column: 1 / -1;
-  width: auto;
-  height: 40vh;
-  min-height: 250px;
-  max-height: 450px;
-  margin: 0 0 20px 0;
+.iconBtn {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    backdrop-filter: blur(4px);
 }
 
-.maximized .largeCover {
-  height: 100%;
-  width: auto;
-  border-radius: 12px;
-  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+.iconBtn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: scale(1.1);
 }
 
-.trackHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 20px;
-  flex-shrink: 0;
+.scrollContent {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.maximized .trackHeader {
-  grid-column: 1 / -1;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 20px;
+.container:not(.maximized) .scrollContent {
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0 0 120px 0;
+    height: 100%;
 }
 
-.trackInfoMain {
-  flex: 1;
-  margin-right: 15px;
+.container:not(.maximized) .scrollContent::-webkit-scrollbar {
+    width: 8px;
 }
 
-.maximized .trackInfoMain {
-  margin-right: 0;
-  margin-bottom: 10px;
+.container:not(.maximized) .scrollContent::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
 }
 
-.songTitle {
-  font-size: 1.25rem;
-  font-weight: 700;
-  margin: 0 0 4px 0;
-  color: white;
-  line-height: 1.2;
-}
-
-.maximized .songTitle {
-  font-size: 2.2rem;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-}
-
-.artistName {
-  font-size: 0.95rem;
-  color: #b3b3b3;
-  margin: 0;
-}
-
-.maximized .artistName {
-  font-size: 1.1rem;
-  color: #def6ff;
-}
-
-.actions {
-  display: flex;
-  gap: 15px;
-  padding-top: 5px;
-}
-
-.maximized .actions {
-  margin-top: 5px;
-  transform: scale(1.1);
-}
-
-.actionBtn {
-  background: transparent;
-  border: none;
-  color: #b3b3b3;
-  cursor: pointer;
-  padding: 0;
-  transition: all 0.2s;
-}
-
-.actionBtn:hover {
-  color: #def6ff;
-  transform: scale(1.1);
-}
-
-.creditSection {
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  flex-shrink: 0;
-}
-
-.maximized .creditSection {
-  display: block;
-  grid-column: 1 / 2;
-  margin-top: 0;
-  height: 100%;
-}
-
-.queueSection {
-  padding-top: 10px;
-  flex-shrink: 0;
-}
-
-.maximized .queueSection {
-  display: block;
-  grid-column: 2 / 3;
-  background-color: rgba(255, 255, 255, 0.05);
-  padding: 20px;
-  border-radius: 12px;
-  height: 100%;
+.maximized .scrollContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 40px;
+    row-gap: 30px;
+    align-items: start;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 40px 120px 40px;
+    height: auto;
+    overflow: visible;
 }
 
 @media (max-width: 900px) {
-  .maximized .scrollContent {
-    grid-template-columns: 1fr;
-    padding: 80px 20px 120px 20px;
-  }
-  .maximized .creditSection {
+    .maximized .scrollContent {
+        grid-template-columns: 1fr;
+        padding: 20px 20px 120px 20px;
+    }
+    .maximized .coverSection,
+    .maximized .trackHeader,
+    .maximized .creditSection,
+    .maximized .queueSection {
+        grid-column: 1 / -1;
+    }
+}
+
+.coverSection {
+    margin: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    padding: 0 10px;
+}
+
+.largeCover {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.maximized .coverSection {
     grid-column: 1 / -1;
-  }
-  .maximized .queueSection {
+    grid-row: 1;
+    width: auto;
+    height: 40vh;
+    min-height: 250px;
+    max-height: 450px;
+    justify-self: center;
+    margin-bottom: 20px;
+}
+
+.maximized .largeCover {
+    height: 100%;
+    width: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+}
+
+.trackHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.maximized .trackHeader {
     grid-column: 1 / -1;
-  }
+    grid-row: 2;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.trackInfoMain {
+    flex: 1;
+}
+
+.songTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.artistName {
+    font-size: 1rem;
+    color: #b3b3b3;
+}
+
+.maximized .songTitle {
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.maximized .artistName {
+    font-size: 1.2rem;
+    color: #def6ff;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    padding-top: 5px;
+}
+
+.maximized .actions {
+    margin-top: 10px;
+    transform: scale(1.2);
+}
+
+.actionBtn {
+    background: transparent;
+    border: none;
+    color: #b3b3b3;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.2s;
+}
+
+.actionBtn:hover {
+    color: #def6ff;
+    transform: scale(1.1);
+}
+
+.creditSection {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 0 20px 20px 20px;
+}
+
+.maximized .creditSection {
+    display: block;
+    grid-column: 1 / 2;
+    grid-row: 3;
+    margin: 0;
+    height: 100%;
+}
+
+.queueSection {
+    padding: 0 20px;
+}
+
+.maximized .queueSection {
+    display: block;
+    grid-column: 2 / 3;
+    grid-row: 3;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    height: 100%;
 }
 
 .queueHeader {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .queueHeader h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0;
-  color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0;
+    color: white;
 }
 
 .seeAll {
-  font-size: 0.8rem;
-  color: #b3b3b3;
-  cursor: pointer;
-  font-weight: 600;
+    font-size: 0.8rem;
+    color: #b3b3b3;
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .queueItem {
-  display: flex;
-  align-items: center;
-  padding: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  margin-bottom: 4px;
-  transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .queueItem:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .queueIcon {
-  width: 40px;
-  height: 40px;
-  background: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  margin-right: 12px;
+    width: 40px;
+    height: 40px;
+    background: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin-right: 12px;
 }
 
 .queueInfo {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .queueTitle {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: white;
 }
 
 .queueArtist {
-  font-size: 0.8rem;
-  color: #888;
+    font-size: 0.8rem;
+    color: #888;
 }
 
 .resizer {
-  width: 10px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: ew-resize;
-  z-index: 10;
-  background: transparent;
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: ew-resize;
+    z-index: 200;
+    background: transparent;
 }
 
 .resizer:hover {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .resizing {
-  user-select: none;
-  border-left-color: #def6ff;
+    user-select: none;
+    border-left-color: #def6ff;
 }
