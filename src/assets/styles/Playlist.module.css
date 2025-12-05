@@ -1,0 +1,249 @@
+/* src/assets/styles/Playlist.module.css */
+.playlistContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+  color: white;
+  /* Hiệu ứng loang màu Teal từ trên xuống, chuyển dần sang màu nền tối */
+  background: linear-gradient(to bottom, rgba(41, 197, 230, 0.5) 0%, #121212 400px);
+  padding-bottom: 40px;
+}
+
+/* --- PHẦN HEADER (Ảnh bìa + Thông tin) --- */
+.header {
+  display: flex;
+  align-items: flex-end;
+  padding: 30px 30px 24px;
+  gap: 24px;
+}
+
+.coverImage {
+  width: 232px;
+  height: 232px;
+  object-fit: cover;
+  box-shadow: 0 4px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+}
+
+.playlistInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.publicLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: 4rem; /* Kích thước chữ lớn cho tiêu đề */
+  font-weight: 900;
+  margin: 0 0 12px 0;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.userAvatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 8px;
+  object-fit: cover;
+}
+
+.meta span {
+  margin: 0 4px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.meta b {
+  color: white;
+}
+
+/* --- THANH ĐIỀU KHIỂN (Play, Shuffle, ...) --- */
+.controls {
+  padding: 24px 30px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.playButton {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #29c5e6; /* Màu Teal chủ đạo */
+  border: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 8px 8px rgba(0,0,0,0.3);
+}
+
+.playButton:hover {
+  transform: scale(1.05);
+  background-color: #5ce0fa;
+}
+
+.actionButton {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.actionButton:hover {
+  color: white;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.searchOrder {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.searchOrder span:hover {
+    color: white;
+}
+
+/* --- DANH SÁCH BÀI HÁT (Table) --- */
+.tableContainer {
+  padding: 0 30px;
+}
+
+.tableHeader {
+  display: grid;
+  /* Định nghĩa các cột: # | Title | Album | Date Added | Time */
+  grid-template-columns: 40px minmax(200px, 4fr) minmax(150px, 2fr) minmax(120px, 1fr) 50px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+  height: 36px;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.trackRow {
+  display: grid;
+  grid-template-columns: 40px minmax(200px, 4fr) minmax(150px, 2fr) minmax(120px, 1fr) 50px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.trackRow:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.trackRow:hover .trackTitle {
+    color: white;
+}
+.trackRow:hover .index {
+    display: none;
+}
+.trackRow:hover .playIcon {
+    display: block;
+}
+
+.indexContainer {
+    position: relative;
+    width: 20px;
+}
+.index {
+    display: block;
+}
+.playIcon {
+    display: none;
+    color: white;
+    font-size: 1rem;
+}
+
+/* Cột thông tin bài hát (Ảnh + Tên + Ca sĩ) */
+.trackMain {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.trackCover {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.trackInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.trackTitle {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.trackArtist {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.albumName, .dateAdded {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+}
+
+.duration {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}

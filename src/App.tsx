@@ -3,8 +3,9 @@ import '../src/assets/styles/App.css';
 import Header from './components/Layout/Header.tsx';
 import PlayerControlBar from './components/Layout/PlayerControlBar.tsx';
 import NowPlayingView from './components/Player/NowPlayingView.tsx';
-import Home from './components/Page/Home.tsx';
+// import Home from './components/Page/Home.tsx';
 import YourLibrary from './components/Layout/YourLibrary.tsx';
+import Playlist from './components/Page/Playlist.tsx';
 
 function App() {
   const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false);
@@ -37,11 +38,18 @@ function App() {
           onToggle={() => setIsLibraryCollapsed(!isLibraryCollapsed)}
         />
 
-        {!isPlayerMaximized && (
+        {/* {!isPlayerMaximized && (
           <div className="content-area main-page-wrapper">
             <Home />
           </div>
-        )}
+        )} */}
+
+        {!isPlayerMaximized && (
+        <div className="content-area main-page-wrapper">
+        {/* Thay Home bằng Playlist để xem kết quả */}
+        <Playlist /> 
+        </div>
+        )}  
 
         {isRightSidebarOpen && (
           <NowPlayingView 
